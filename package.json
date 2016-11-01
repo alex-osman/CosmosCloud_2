@@ -1,0 +1,19 @@
+{
+  "name": "cosmoscloud",
+  "version": "1.0.0",
+  "description": "Senior Design project for the Cosmos Cloud",
+  "main": "app.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex-osman/CosmsCloud_SD.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alex-osman/CosmsCloud_SD/issues"
+  },
+  "homepage": "https://github.com/alex-osman/CosmsCloud_SD#readme"
+}
