@@ -9,5 +9,5 @@ git config credential.helper "store --file=.git/credentials"
 
 git checkout master
 git pull origin master
-git merge $TRAVIS_COMMIT
+git merge $TRAVIS_COMMIT -m "merge from travis wjfioej"
 git push origin master
