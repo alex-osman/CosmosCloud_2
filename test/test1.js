@@ -18,5 +18,12 @@ describe("Squares", function() {
 	})
 })
 
+describe("add", function() {
+	it("adds two numbers", function() {
+		var ten = funcs.add(3, 7);
+		expect(ten).to.equal(10);
+	})
+})
+
 
 console.log("test1");
