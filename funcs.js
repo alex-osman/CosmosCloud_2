@@ -1,3 +1,5 @@
 exports.square = function(x) {
-	return x*x;
+	if (x > 0)
+		return x*x;
+	else return 5;
 }
