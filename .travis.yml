@@ -9,3 +9,6 @@ script:
 branches:
   only:
     - test
+
+after_success:
+  ./merge.sh

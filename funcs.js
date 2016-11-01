@@ -1,5 +1,4 @@
 exports.square = function(x) {
-	if (x > 0)
-		return -1;
+	console.log("new stuff");
 	return x*x;
 }
