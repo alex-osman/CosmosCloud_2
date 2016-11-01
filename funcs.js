@@ -4,5 +4,6 @@ exports.square = function(x) {
 }
 
 exports.add = function(x, y) {
+	console.log("adding!");
 	return x + y;
 }
