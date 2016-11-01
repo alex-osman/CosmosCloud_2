@@ -8,4 +8,10 @@ script:
   - npm test
 branches:
   only:
+<<<<<<< HEAD
     - test
+=======
+    - test
+
+after_success:
+  ./merge.sh
