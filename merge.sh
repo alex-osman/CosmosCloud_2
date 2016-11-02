@@ -10,9 +10,12 @@ export GIT_COMMITTER_EMAIL='travis@travis'
 export GIT_COMMITTER_NAME='Travis CI'
 
 git remote update
-git fetch
+git fetch --all
+git checkout master
+echo "next"
+git pull
 
-git checkout master origin/master
+
 
 #git merge $TRAVIS_COMMIT || exit
 #git push origin master
