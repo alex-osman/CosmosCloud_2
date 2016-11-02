@@ -5,8 +5,9 @@ if [ "$TRAVIS_BRANCH" != "test" ]; then
 fi
 
 git config credential.helper "store --file=.git/credentials"
- echo "https://${GH_TOKEN}:@github.com" > .git/credentials
+echo "https://${GH_TOKEN}:@github.com" > .git/credentials
 
+git fetch
 git checkout master
 git pull origin master
 git merge $TRAVIS_COMMIT -m "merge from travis test2"
