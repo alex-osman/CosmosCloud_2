@@ -6,9 +6,10 @@ fi
 
 git config credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials
-
 git fetch
-git checkout master
-git pull origin master
-git merge $TRAVIS_COMMIT -m "merge from travis test2"
+export GIT_COMMITTER_EMAIL='travis@travis'
+export GIT_COMMITTER_NAME='Travis CI'
+
+git checkout master || exit
+git merge $TRAVIS_COMMIT || exit
 git push origin master
