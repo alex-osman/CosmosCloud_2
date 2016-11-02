@@ -9,11 +9,12 @@ echo "https://${GH_TOKEN}:@github.com" > .git/credentials
 export GIT_COMMITTER_EMAIL='travis@travis'
 export GIT_COMMITTER_NAME='Travis CI'
 
-git remote update
-git fetch --all
+git clone git@github.com:alex-osman/CosmosCloud_SD.git
+
 git checkout master
-echo "next"
-git pull
+
+git merge $TRAVIS_COMMIT
+git push origin master
 
 
 
