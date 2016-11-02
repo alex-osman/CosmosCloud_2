@@ -10,6 +10,6 @@ git fetch
 export GIT_COMMITTER_EMAIL='travis@travis'
 export GIT_COMMITTER_NAME='Travis CI'
 
-git checkout -b master --track origin/master
+git checkout master
 git merge $TRAVIS_COMMIT || exit
 git push origin master
