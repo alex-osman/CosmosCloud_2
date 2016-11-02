@@ -12,6 +12,6 @@ export GIT_COMMITTER_NAME='Travis CI'
 git remote update
 git fetch
 
-git checkout -t -b master origin/master
+git checkout master
 git merge $TRAVIS_COMMIT || exit
 git push origin master
