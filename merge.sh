@@ -19,7 +19,8 @@ echo "checking out master"
 git checkout master
 
 echo "merging"
-git merge -m "$TRAVIS_COMMIT"
+git fetch
+git merge origin/master -m "$TRAVIS_COMMIT"
 
 echo "pushing to master"
 git push origin master
