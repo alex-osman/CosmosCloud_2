@@ -9,14 +9,17 @@ echo "https://${GH_TOKEN}:@github.com" > .git/credentials
 export GIT_COMMITTER_EMAIL='travis@travis'
 export GIT_COMMITTER_NAME='Travis CI'
 
-git clone git@github.com:alex-osman/CosmosCloud_SD.git
+push_uri="https://$GH_TOKEN@github.com/CosmosCloud_SD"
 
+echo "cloning and cd temp"
+git clone "https://github.com/alex-osman/CosmosCloud_SD" "temp"
+cd "temp"
+
+echo "checking out master"
 git checkout master
 
-git merge $TRAVIS_COMMIT
-git push origin master
+echo "merging"
+git merge "$TRAVIS_COMMIT"
 
-
-
-#git merge $TRAVIS_COMMIT || exit
-#git push origin master
+echo "pushing to master"
+git push "$push_uri" master
