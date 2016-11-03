@@ -9,6 +9,5 @@ exports.add = function(x, y) {
 }
 
 exports.subtract = function(x, y) {
-  console.log("subtracting");
-  return x - y;
+  return x - y - y;
 }

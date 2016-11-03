@@ -19,6 +19,10 @@ echo "checking out master"
 git checkout master
 
 echo "merging"
+git config --global user.email "travis@travis.com"
+git config --global user.name "travis"
+
+
 git fetch
 git merge origin/test -m "$TRAVIS_COMMIT"
 
