@@ -7,3 +7,8 @@ exports.add = function(x, y) {
 	console.log("adding!");
 	return x + y;
 }
+
+exports.subtract = function(x, y) {
+  console.log("subtracting");
+  return x - y;
+}
