@@ -20,7 +20,7 @@ git checkout master
 
 echo "merging"
 git fetch
-git merge test -m "$TRAVIS_COMMIT"
+git merge origin/test -m "$TRAVIS_COMMIT"
 
 echo "pushing to master"
 git push origin master
