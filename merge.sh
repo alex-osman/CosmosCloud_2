@@ -9,8 +9,6 @@ cd "temp"
 
 git config credential.helper "store --file=.git/credentials"
 echo "https://${GH_TOKEN}:@github.com" > .git/credentials
-export GIT_COMMITTER_EMAIL='travis@travis'
-export GIT_COMMITTER_NAME='Travis CI'
 
 push_uri="https://$GH_TOKEN@github.com/CosmosCloud_SD"
 
@@ -18,11 +16,11 @@ push_uri="https://$GH_TOKEN@github.com/CosmosCloud_SD"
 echo "checking out master"
 git checkout master
 
-echo "merging"
+echo "setting credentials"
 git config --global user.email "travis@travis.com"
 git config --global user.name "travis"
 
-
+echo "fetch and merge"
 git fetch
 git merge origin/test -m "$TRAVIS_COMMIT"
 
