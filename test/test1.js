@@ -27,8 +27,8 @@ describe("add", function() {
 
 describe("subtract", function() {
 	it("subtracts second from first number", function() {
-		var ten = funcs.subtract(11, 1);
-		expect(ten).to.equal(9);
+		var three = funcs.subtract(7, 4);
+		expect(three).to.equal(3);
 	})
 })
 

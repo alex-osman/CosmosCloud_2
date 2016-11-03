@@ -9,5 +9,5 @@ exports.add = function(x, y) {
 }
 
 exports.subtract = function(x, y) {
-  return x - y - y;
+  return x - y;
 }
