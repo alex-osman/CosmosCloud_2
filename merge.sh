@@ -19,7 +19,7 @@ echo "checking out master"
 git checkout master
 
 echo "merging"
-git merge "$TRAVIS_COMMIT"
+git merge --ff-only "$TRAVIS_COMMIT"
 
 echo "pushing to master"
-git push "$push_uri" master
+git push origin master
