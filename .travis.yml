@@ -24,11 +24,12 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 before_script:
-  - npm install -g angular/cli
+  - npm install -g angular-cli
   - npm install -g karma
+  - ng build
 
 script:
-  - ng build
+  - karma start config/karma.conf.js --single-run
 
 after_sucess:
   - echo "hello"
