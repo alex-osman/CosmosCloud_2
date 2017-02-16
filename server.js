@@ -1,15 +1,15 @@
-var app		= express();
-var ping = require('ping');
-var http = require('http');
-var	exec = require('child_process').exec;
+var app = require('express')();
+var bodyParser = require('body-parser');
+var exec = require('child_process').exec;
 var MongoClient = require('mongodb').MongoClient
 var assert = require('assert');
+app.use(bodyParser.json());
 
 //Configure database;
-MongoClient.connect('mongodb://localhost:27017/myproject', function(err, db) {
+MongoClient.connect('mongodb://localhost:27017/cosmos', function(err, db) {
   assert.equal(null, err);
   console.log("Mongo Connection Successful")
-  require('./routes/nodes.js')(db);
+  require('./routes/nodes.js')(app, db);
 })
 
 
