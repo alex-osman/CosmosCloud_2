@@ -4,7 +4,7 @@ dist: trusty
 language: node_js
 
 node_js:
-  - "4.2.6"
+  - "7.0.0"
 
 branches:
   only:
@@ -24,13 +24,13 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 before_script:
-  - npm install -g angular-cli
+  - npm install -g @angular/cli@latest
   - npm install -g karma
   - npm install
-  - ng build --dev
+  - ng build
 
 script:
-  - karma start config/karma.conf.js --single-run
+  - karma start karma.conf.js --single-run
 
 after_sucess:
   - echo "it all worked out"
