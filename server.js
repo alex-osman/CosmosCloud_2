@@ -12,6 +12,8 @@ MongoClient.connect('mongodb://localhost:27017/cosmos', function(err, db) {
   require('./routes/nodes.js')(app, db);
 })
 
+// Load modules
+require('./routes/relay.js')('/relay', app, request, MongoClient);
 
 //Start server, listen to everything
 var port = 8888;
