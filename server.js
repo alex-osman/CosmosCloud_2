@@ -1,18 +1,21 @@
+var app = require('express')();
 var bodyParser = require('body-parser');
-var express = require('express');
-var request = require('request');
-var app = express();
+var exec = require('child_process').exec;
+var MongoClient = require('mongodb').MongoClient
+var assert = require('assert');
+app.use(bodyParser.json());
 
-// Configure Express app
-app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json({limit: '5000mb'}));
-app.use(bodyParser.urlencoded({limit: '5000mb'}));
+//Configure database;
+MongoClient.connect('mongodb://localhost:27017/cosmos', function(err, db) {
+  assert.equal(null, err);
+  console.log("Mongo Connection Successful")
+  require('./routes/nodes.js')(app, db);
+})
 
 // Load modules
-require('./routes/relay.js')('/relay', app, request /* TODO: Add DB connection */);
+require('./routes/relay.js')('/relay', app, request, MongoClient);
 
-// Start server, listen to everything
-var port = 8000;
+//Start server, listen to everything
+var port = 8888;
 app.listen(port, '0.0.0.0');
-console.log('App listening on port ' + port);
-
+console.log("App listening on port " + port);
