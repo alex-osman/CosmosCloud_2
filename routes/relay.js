@@ -1,4 +1,4 @@
-module.exports = function (baseUrl, app, request /* TODO: Add DB connection */) {
+module.exports = function (baseUrl, app, request, MongoClient) {
   /*
    * Send the :action to the specified :channel relay of :id
    * @param {String} :id - The id from the database of the computer we will be communicating with
