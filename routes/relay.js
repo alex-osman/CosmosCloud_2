@@ -1,4 +1,6 @@
-module.exports = function (baseUrl, app, request, MongoClient) {
+module.exports = function (app, request, Node) {
+  var baseUrl = '/relay';
+
   /*
    * Send the :action to the specified :channel relay of :id
    * @param {String} :id - The id from the database of the computer we will be communicating with
@@ -11,7 +13,6 @@ module.exports = function (baseUrl, app, request, MongoClient) {
     var action = req.params.action;
     var ip = req.params.ip;
 
-    // TODO : GET IP FROM DB
     request('http://' + ip + '/' + action + '/' + channel, function (error, response, body) {
       if (!error && response.statusCode === 200) {
         res.send(body);
