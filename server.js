@@ -11,6 +11,7 @@ MongoClient.connect('mongodb://localhost:27017/cosmos', function(err, db) {
   assert.equal(null, err);
   console.log('Mongo Connection Successful');
   require('./routes/nodes.js')(app, db);
+  require('./routes/rgb.js')('/rgb', app, request, MongoClient);
 });
 
 // Load modules
