@@ -30,7 +30,6 @@ module.exports = function(app, database) {
   //User deletes a node
   app.post('/api/deleteNode', function(req, res) {
     var node = req.body.node;
-    console.log(node);
 
     deleteNode(node, function(result) {
       res.send(result);
@@ -49,7 +48,7 @@ module.exports = function(app, database) {
 //Sets it up with the correct modules
 var connect = function(ip, callback) {
   //Check database for information about ip
-  console.log(ip);
+  console.log("Connect: " + ip);
   lookupIP(ip, function(dbNodes) {
     if (dbNodes.length == 1) {
       var node = dbNodes[0];
@@ -60,7 +59,7 @@ var connect = function(ip, callback) {
         callback(node.modules);
       } else {
         //This pi hasn't been set up yet
-        console.log("Input settings on the website");
+        console.log("Input settings for " + ip + " on the website");
         callback("NO MODULES");
       }
     } else if (dbNodes.length == 0) {
@@ -85,7 +84,6 @@ var configureNode = function(node, callback) {
   var collection = db.collection('nodes');
   collection.updateOne({ "ip": node.ip }, { $set: { "name": node.name, "modules": node.modules } }, function(err, result) {
     assert.equal(err, null);
-    console.log(result);
     callback(result);
   })
 }
@@ -126,3 +124,5 @@ var getNodes = function(callback) {
     callback(nodes);
   })
 }
+
+exports.getNodes = getNodes;
