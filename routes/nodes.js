@@ -21,7 +21,6 @@ module.exports = function(app, database) {
   //User submits settings of a new node
   app.post('/api/configureNode', function(req, res) {
     var node = req.body.node;
-    console.log(node);
 
     configureNode(node, function(result) {
       res.send(result);
@@ -54,7 +53,7 @@ var connect = function(ip, callback) {
   lookupIP(ip, function(dbNodes) {
     if (dbNodes.length == 1) {
       var node = dbNodes[0];
-      console.log(node);
+      
       //Send modules to start
       if (node.modules) { 
         console.log("Starting " + node.name);
@@ -105,7 +104,6 @@ var addIP = function(ip, callback) {
   var collection = db.collection('nodes');
   collection.insertOne({ "ip": ip }, function(err, result) {
     assert.equal(err, null);
-    console.log(result);
     callback(result);
   })
 }
