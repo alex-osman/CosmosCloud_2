@@ -1,20 +1,21 @@
 var app = require('express')();
 var bodyParser = require('body-parser');
-// var exec = require('child_process').exec;
-var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var request = require('request');
 app.use(bodyParser.json());
 
-// Configure database;
-MongoClient.connect('mongodb://localhost:27017/cosmos', function(err, db) {
-  assert.equal(null, err);
-  console.log('Mongo Connection Successful');
-  require('./routes/nodes.js')(app, db);
-});
+var mongoose = require("mongoose");
+var promise = require('bluebird');
+mongoose.Promise = promise;
+mongoose.connect("mongodb://localhost:27017/cosmos");
+console.log("Mongodb connected");
+
+// Models
+var Node = require('./models/node.js');
 
 // Load modules
-require('./routes/relay.js')('/relay', app, request, MongoClient);
+require('./routes/relay.js')(app, request, Node);
+require('./routes/nodes.js')(app, Node);
 
 // Start server, listen to everything
 var port = 8888;
