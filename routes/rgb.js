@@ -1,6 +1,11 @@
 var assert = require('assert');
+var portDB;
+var nodeDB;
 
-module.exports = function(baseUrl, app, request, MongoClient) {
+module.exports = function(app, request, n, p) {
+  var baseUrl = '/rgb';
+  nodeDB = n;
+  portDB = p;
   /*
    * Send the :style to a specific :node
    * @param {String} :node - The node that we want to communicate with
@@ -60,8 +65,7 @@ module.exports = function(baseUrl, app, request, MongoClient) {
 
 //  Get all the Ips that have a RGB module tied to them
 var getRgbIP = function(callback) {
-  var collection = db.collection('nodes');
-  collection.find({'modules.type': 'rgb'}).toArray(function(err, ip) {
+  nodeDB.find({'modules.type': 'rgb'}).exec(function(err, ip) {
     assert.equal(err, null);
     callback(ip);
   });
@@ -69,8 +73,7 @@ var getRgbIP = function(callback) {
 
 //  Get the ports for specific modules
 var getPort = function(callback) {
-  var collection = db.collection('ports');
-  collection.findOne({}, function(err, ports) {
+  portDB.findOne({}, function(err, ports) {
     assert.equal(err, null);
     callback(ports);
   });
