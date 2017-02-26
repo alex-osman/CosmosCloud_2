@@ -1,4 +1,5 @@
 var Node;
+var port = '8080';
 
 module.exports = function (app, request, n) {
   var baseUrl = '/relay';
@@ -18,8 +19,8 @@ module.exports = function (app, request, n) {
 
     getIpFromId(id, function(err, node) {
       assert.equal(err, null);
-      
-      request('http://' + node.ip + '/' + action + '/' + channel, function (error, response, body) {
+
+      request('http://' + node.ip + ':' + port + '/' + action + '/' + channel, function (error, response, body) {
         if (!error && response.statusCode === 200) {
           res.send(body);
         }
@@ -39,8 +40,8 @@ module.exports = function (app, request, n) {
 
     getIpFromId(id, function(err, node) {
       assert.equal(err, null);
-      
-      request('http://' + ip + '/' + action, function (error, response, body) {
+
+      request('http://' + ip + ':' + port + '/' + action, function (error, response, body) {
         if (!error && response.statusCode === 200) {
           res.send(body);
         }
