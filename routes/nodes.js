@@ -1,25 +1,24 @@
-var fs = require('fs');
 var assert = require('assert');
 var Node;
 
 module.exports = function(app, n) {
   Node = n;
 
-  //Node is asking for modules
+  // Node is asking for modules
   app.get('/api/connect', function(req, res) {
     connect(req.ip, function(modules) {
       res.send(modules);
     });
   });
 
-  //Return all nodes
+  // Return all nodes
   app.get('/api/getNodes', function(req, res) {
     getNodes(function(nodes) {
       res.send(nodes);
     });
   });
 
-  //User submits settings of a new node
+  // User submits settings of a new node
   app.post('/api/configureNode', function(req, res) {
     var node = req.body.node;
 
@@ -28,97 +27,101 @@ module.exports = function(app, n) {
     });
   });
 
-  //User deletes a node
+  // User deletes a node
   app.post('/api/deleteNode', function(req, res) {
     var node = req.body.node;
-    console.log(node);
 
     deleteNode(node, function(result) {
       res.send(result);
     });
   });
 
-  //Testing purposes
+  // Testing purposes
   app.get('/test', function(req, res) {
     test();
   });
-}
+};
 
-//Takes the ip of a node
-//Sets it up with the correct modules
+// Takes the ip of a node
+// Sets it up with the correct modules
 var connect = function(ip, callback) {
+<<<<<<< HEAD
   //Check database for information about ip
-  console.log(ip);
+  console.log("Connect: " + ip);
+=======
+  // Check database for information about ip
+>>>>>>> c5b0ccc59e13dcac631fc1b89c258c08adc5de42
   lookupIP(ip, function(dbNodes) {
     if (dbNodes.length === 1) {
       var node = dbNodes[0];
-      
-      //Send modules to start
-      if (node.modules) { 
-        console.log("Starting " + node.name);
+
+      // Send modules to start
+      if (node.modules) {
+        console.log('Starting ' + node.name);
         callback(node.modules);
       } else {
+<<<<<<< HEAD
         //This pi hasn't been set up yet
-        console.log("Input settings on the website");
+        console.log("Input settings for " + ip + " on the website");
         callback("NO MODULES");
+=======
+        // This pi hasn't been set up yet
+        console.log('Input settings on the website');
+        callback('NO MODULES');
+>>>>>>> c5b0ccc59e13dcac631fc1b89c258c08adc5de42
       }
     } else if (dbNodes.length === 0) {
-      //Get information from user
-      console.log("Adding " + ip + " to the db");
+      // Get information from user
+      console.log('Adding ' + ip + ' to the db');
       addIP(ip, function(status) {
         callback(status);
       });
-
-
     } else {
-      //More than one node with the same IP
-      //This is a problem
-      console.log(dbNodes)
-      console.log("Database is configured improperly")
+      // More than one node with the same IP
+      // This is a problem
+      console.log(dbNodes);
+      console.log('Database is configured improperly');
     }
-  });  
-}
+  });
+};
 
-//Adds settings to the database
+// Adds settings to the database
 var configureNode = function(node, callback) {
-  Node.update({ "ip": node.ip }, { "name": node.name, "modules": node.modules }, function(err, result) {
+  Node.update({ 'ip': node.ip }, node, function(err, result) {
     assert.equal(err, null);
-    console.log(result);
     callback(result);
   });
-}
+};
 
-//Removes node from the database
+// Removes node from the database
 var deleteNode = function(node, callback) {
-  Node.remove({ "ip": node.ip}, function(err, result) {
+  Node.remove({ 'ip': node.ip }, function(err, result) {
     assert.equal(err, null);
     callback(result);
   });
-}
+};
 
-//Adds a new ip to the database
+// Adds a new ip to the database
 var addIP = function(ip, callback) {
-  Node.create({ "ip": ip }, function(err, result) {
+  Node.create({ 'ip': ip }, function(err, result) {
     assert.equal(err, null);
     callback(result);
   });
-}
+};
 
-//Looks up an ip in the database
+// Looks up an ip in the database
 var lookupIP = function(ip, callback) {
-console.log(Node);
   Node.find({
-    "ip": ip
+    'ip': ip
   }).exec(function(err, nodes) {
     assert.equal(err, null);
     callback(nodes);
   });
-}
+};
 
 var getNodes = function(callback) {
-  Node.find().toArray(function(err, nodes) {
+  Node.find().exec(function(err, nodes) {
     assert.equal(err, null);
     callback(nodes);
-  });
-}
-
+  })
+};

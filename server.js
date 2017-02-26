@@ -18,8 +18,12 @@ require('./routes/relay.js')(app, request, Node);
 require('./routes/rgb.js')(app, request, Node, Ports);
 require('./routes/nodes.js')(app, Node);
 
+app.get('/test', function(req, res) {
+  res.status(200).send("ok");
+})
+
 // Start server, listen to everything
 var port = 8888;
-app.listen(port, '0.0.0.0');
+server = app.listen(port, '0.0.0.0');
 console.log('App listening on port ' + port);
-
+module.exports = server;

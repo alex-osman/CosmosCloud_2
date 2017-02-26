@@ -27,11 +27,14 @@ before_install:
 before_script:
   - npm install -g @angular/cli@latest
   - npm install -g karma
+  - npm install -g mocha
+  - npm install -g chai
   - npm install
   - ng build
 
 script:
   - karma start karma.conf.js --single-run
+  - mocha
 
 after_sucess:
   - echo "it all worked out"
