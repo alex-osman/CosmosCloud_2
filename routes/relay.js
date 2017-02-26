@@ -1,5 +1,8 @@
-module.exports = function (app, request, Node) {
+var Node;
+
+module.exports = function (app, request, n) {
   var baseUrl = '/relay';
+  Node = n;
 
   /*
    * Send the :action to the specified :channel relay of :id
@@ -11,12 +14,16 @@ module.exports = function (app, request, Node) {
   app.get(baseUrl + '/:id/:action/:channel', (req, res) => {
     var channel = req.params.channel;
     var action = req.params.action;
-    var ip = req.params.ip;
+    var id = req.params.id;
 
-    request('http://' + ip + '/' + action + '/' + channel, function (error, response, body) {
-      if (!error && response.statusCode === 200) {
-        res.send(body);
-      }
+    getIpFromId(id, function(err, node) {
+      assert.equal(err, null);
+      
+      request('http://' + node.ip + '/' + action + '/' + channel, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+          res.send(body);
+        }
+      });
     });
   });
 
@@ -29,14 +36,24 @@ module.exports = function (app, request, Node) {
    */
   app.get(baseUrl + '/:id/:action', function (req, res) {
     var action = req.params.action;
-    var ip = req.params.ip;
 
-    // TODO : GET IP FROM DB
-    request('http://' + ip + '/' + action, function (error, response, body) {
-      if (!error && response.statusCode === 200) {
-        res.send(body);
-      }
+    getIpFromId(id, function(err, node) {
+      assert.equal(err, null);
+      
+      request('http://' + ip + '/' + action, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+          res.send(body);
+        }
+      });
     });
+  });
+};
+
+var getIpFromId = function(id, cb) {
+  Node.find({
+    '_id' : ObjectId(id)
+  }).exec(function(err, node) {
+    cb(err, node);
   });
 };
 
