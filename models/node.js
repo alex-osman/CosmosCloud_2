@@ -1,5 +1,4 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose');
 
 var nodeSchema = new mongoose.Schema({
   ip: {
@@ -8,7 +7,7 @@ var nodeSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    default: ""
+    default: ''
   },
   modules: [{}]
 });
