@@ -35,11 +35,6 @@ module.exports = function(app, n) {
       res.send(result);
     });
   });
-
-  // Testing purposes
-  app.get('/test', function(req, res) {
-    test();
-  });
 };
 
 // Takes the ip of a node
@@ -51,7 +46,7 @@ var connect = function(ip, callback) {
       var node = dbNodes[0];
 
       // Send modules to start
-      if (node.modules) {
+      if (node.modules.length > 0) {
         console.log('Starting ' + node.name);
         callback(node.modules);
       } else {
