@@ -1,5 +1,4 @@
 var request = require('supertest');
-var clearRequire = require('clear-require')
 
 describe("Loading express", function() {
 	var server = require('../server');
