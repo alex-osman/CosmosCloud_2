@@ -10,10 +10,7 @@ var nodeSchema = new mongoose.Schema({
     type: String,
     default: ""
   },
-  modules: {
-    type: [String],
-    default: []
-  }
+  modules: [{}]
 });
 
 module.exports = mongoose.model('Nodes', nodeSchema);

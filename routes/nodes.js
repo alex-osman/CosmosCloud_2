@@ -35,40 +35,24 @@ module.exports = function(app, n) {
       res.send(result);
     });
   });
-
-  // Testing purposes
-  app.get('/test', function(req, res) {
-    test();
-  });
 };
 
 // Takes the ip of a node
 // Sets it up with the correct modules
 var connect = function(ip, callback) {
-<<<<<<< HEAD
-  //Check database for information about ip
-  console.log("Connect: " + ip);
-=======
   // Check database for information about ip
->>>>>>> c5b0ccc59e13dcac631fc1b89c258c08adc5de42
   lookupIP(ip, function(dbNodes) {
     if (dbNodes.length === 1) {
       var node = dbNodes[0];
 
       // Send modules to start
-      if (node.modules) {
+      if (node.modules.length > 0) {
         console.log('Starting ' + node.name);
         callback(node.modules);
       } else {
-<<<<<<< HEAD
         //This pi hasn't been set up yet
         console.log("Input settings for " + ip + " on the website");
         callback("NO MODULES");
-=======
-        // This pi hasn't been set up yet
-        console.log('Input settings on the website');
-        callback('NO MODULES');
->>>>>>> c5b0ccc59e13dcac631fc1b89c258c08adc5de42
       }
     } else if (dbNodes.length === 0) {
       // Get information from user
