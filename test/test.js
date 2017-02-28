@@ -1,6 +1,6 @@
 var request = require('supertest');
 
-describe("Loading express", function() {
+describe("Initialize express", function() {
 	var server = require('../server');
 	it('responds to /test', function testTest(done) {
 		request(server)
@@ -15,8 +15,8 @@ describe("Loading express", function() {
 	});
 });
 
-describe("Start, configure, and delete a node", function() {
-	it('Remove 127.0.0.1 from database', function initialDeleteNode(done) {
+describe("Initialize a Node", function() {
+	it('Delete a node', function initialDeleteNode(done) {
 		request(server)
 			.post('/api/deleteNode')
 			.send({"node": {"ip": "127.0.0.1"}})
@@ -32,13 +32,13 @@ describe("Start, configure, and delete a node", function() {
 			}, done);
 	});
 
-	it('add new node 127.0.0.1', function testConnect(done) {
+	it('Add a node', function testConnect(done) {
 		request(server)
 			.get('/api/connect')
 			.expect(200, done);
 	});
 
-	it('Configure 127.0.0.1 with rgb and relay', function deleteNode(done) {
+	it('Configure a node', function deleteNode(done) {
 		request(server)
 			.post('/api/configureNode')
 			.send({"node": {
@@ -55,13 +55,13 @@ describe("Start, configure, and delete a node", function() {
 			}, done);
 	});
 
-	it('Returns rgb and relay when connecting', function getModules(done) {
+	it('Return modules to start', function getModules(done) {
 		request(server)
 			.get('/api/connect')
 			.expect(200, [{"type": "relay"}, {"type": "rgb"}], done);
 	});
 
-	it('Deletes 127.0.0.1', function deleteNode(done) {
+	it('Delete a node', function deleteNode(done) {
 		request(server)
 			.post('/api/deleteNode')
 			.send({"node": {"ip": "127.0.0.1"}})
