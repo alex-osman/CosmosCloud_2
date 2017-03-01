@@ -1,6 +1,8 @@
+var assert = require('assert');
 var Node;
+var port = '8080';
 
-module.exports = function (app, request, n) {
+module.exports = function(app, request, n) {
   var baseUrl = '/relay';
   Node = n;
 
@@ -18,8 +20,8 @@ module.exports = function (app, request, n) {
 
     getIpFromId(id, function(err, node) {
       assert.equal(err, null);
-      
-      request('http://' + node.ip + '/' + action + '/' + channel, function (error, response, body) {
+
+      request('http://' + node.ip + ':' + port + '/' + action + '/' + channel, function(error, response, body) {
         if (!error && response.statusCode === 200) {
           res.send(body);
         }
@@ -34,13 +36,14 @@ module.exports = function (app, request, n) {
    * @param {String} :channel - The channel of the relay we intend to take the action on
    * @return {TODO} TODO
    */
-  app.get(baseUrl + '/:id/:action', function (req, res) {
+  app.get(baseUrl + '/:id/:action', function(req, res) {
     var action = req.params.action;
+    var id = req.params.id;
 
     getIpFromId(id, function(err, node) {
       assert.equal(err, null);
-      
-      request('http://' + ip + '/' + action, function (error, response, body) {
+
+      request('http://' + node.ip + ':' + port + '/' + action, function(error, response, body) {
         if (!error && response.statusCode === 200) {
           res.send(body);
         }
@@ -50,9 +53,7 @@ module.exports = function (app, request, n) {
 };
 
 var getIpFromId = function(id, cb) {
-  Node.find({
-    '_id' : ObjectId(id)
-  }).exec(function(err, node) {
+  Node.findById(id).exec(function(err, node) {
     cb(err, node);
   });
 };
