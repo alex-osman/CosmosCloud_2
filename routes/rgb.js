@@ -12,12 +12,12 @@ module.exports = function(app, request, n, p) {
    * @param {String} :style - The style for the indicator
    * @return {TODO} TODO
   */
-  app.get(baseUrl + '/:node/:style', function(req, res) {
+  app.get(baseUrl + '/:id/:style', function(req, res) {
     var style = req.params.style;
     getPort(function(ports) {
       getRgbIP(function(rgbIP) {
         rgbIP.forEach(function(ip) {
-          //  console.log('http://' + ip.ip + ':' + ports.rgb + '/' + style);
+          console.log('http://' + ip.ip + ':' + ports.rgb + '/' + style);
           request('http://' + ip.ip + ':' + ports.rgb + '/' + style, function(err, response, body) {
             if (!err && response.statusCode === 200) {
               //  console.log(body);
@@ -40,7 +40,7 @@ module.exports = function(app, request, n, p) {
    * @param {String} :blue - The rgb color code for blue
    * @return {TODO} TODO
   */
-  app.get(baseUrl + '/:node/:style/:red/:green/:blue', function(req, res) {
+  app.get(baseUrl + '/:id/:style/:red/:green/:blue', function(req, res) {
     var style = req.params.style;
     var r = req.params.red;
     var g = req.params.green;
@@ -48,7 +48,7 @@ module.exports = function(app, request, n, p) {
     getPort(function(ports) {
       getRgbIP(function(rgbIP) {
         rgbIP.forEach(function(ip) {
-          //  console.log('http://' + ip.ip + ':' + ports.rgb + '/' + style + '/' + r +'/' + g + '/' + b);
+          console.log('http://' + ip.ip + ':' + ports.rgb + '/' + style + '/' + r + '/' + g + '/' + b);
           request('http://' + ip.ip + ':' + ports.rgb + '/' + style + '/' + r + '/' + g + '/' + b, function(err, response, body) {
             if (!err && response.statusCode === 200) {
               //  console.log(body);
@@ -73,8 +73,8 @@ var getRgbIP = function(callback) {
 
 //  Get the ports for specific modules
 var getPort = function(callback) {
-  portDB.findOne({}, function(err, ports) {
+  portDB.find({}).exec(function(err, ports) {
     assert.equal(err, null);
-    callback(ports);
+    callback(ports[0]);
   });
 };
