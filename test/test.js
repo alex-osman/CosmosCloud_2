@@ -63,7 +63,7 @@ describe('Start, configure, a node', function() {
 });
 
 describe('RGBServer sending information to RGB on Python RGBServer', function() {
-  it('returns 200 status /rgb/on', function() {
+  it('returns 200 status /rgb/0/on', function() {
     request(server).get('/rgb/0/on', function(response, body) {
       expect(response.statusCode).to.equal(200);
     });
@@ -73,7 +73,7 @@ describe('RGBServer sending information to RGB on Python RGBServer', function() 
       expect(body).to.equal({style: 'on', rgb: [0, 0, 0]});
     });
   });
-  it('returns 200 status /rgb/on/1/2/3/', function() {
+  it('returns 200 status /rgb/0/on/1/2/3/', function() {
     request(server).get('/rgb/0/on/1/2/3/', function(response, body) {
       expect(response.statusCode).to.equal(200);
     });
@@ -83,7 +83,7 @@ describe('RGBServer sending information to RGB on Python RGBServer', function() 
       expect(body).to.equal({style: 'on', rgb: [1, 2, 3]});
     });
   });
-  it('returns 200 status /rgb/off', function() {
+  it('returns 200 status /rgb/0/off', function() {
     request(server).get('/rgb/0/off', function(response, body) {
       expect(response.statusCode).to.equal(200);
     });
@@ -93,7 +93,7 @@ describe('RGBServer sending information to RGB on Python RGBServer', function() 
       expect(body).to.equal({style: 'off', rgb: [0, 0, 0]});
     });
   });
-  it('returns 200 status /rgb/off/1/2/3/', function() {
+  it('returns 200 status /rgb/0/off/1/2/3/', function() {
     request(server).get('/rgb/0/off/1/2/3/', function(response, body) {
       expect(response.statusCode).to.equal(200);
     });
