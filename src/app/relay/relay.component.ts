@@ -21,4 +21,8 @@ export class RelayComponent implements OnInit {
     this.relayService.getRelays().then(relays => this.relays = relays);
   }
 
+  toggle(relay: number, channel: number): void {
+    this.relayService.toggle(relay, channel).then(r => this.relays[relay] = r);
+  }
+
 }

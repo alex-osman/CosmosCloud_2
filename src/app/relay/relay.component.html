@@ -1,10 +1,12 @@
 <div class="row">
   <div class="col-md-12" class="relays">
     <h2>{{title}}</h2>
-    <div *ngFor="let relay of relays">
+    <div *ngFor="let relay of relays; let relayI = index">
       <h3>{{relay.name}}</h3><br>
-      <label>Channel 1: </label>{{relay.channels[0]}}<br>
-      <label>Channel 2: </label>{{relay.channels[1]}}<br>
+      <div *ngFor="let channel of relay.channels; let channelI = index">
+        <label>{{channelI}}:</label>{{channel}}
+        <button (click)="toggle(relayI, channelI)">Toggle</button>
+      </div>
     </div>
   </div>
 </div>
