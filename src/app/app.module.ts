@@ -6,12 +6,13 @@ import { RouterModule } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
-
 import { AppRoutingModule }   from './app-routing.module';
 import { RelayComponent } from './relay/relay.component';
 import { FileshareComponent } from './fileshare/fileshare.component';
 import { IndicatorComponent } from './indicator/indicator.component';
 import { HomeComponent } from './home/home.component';
+import { RelayService } from './relay.service';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { HomeComponent } from './home/home.component';
     RouterModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [RelayService],
   bootstrap: [AppComponent]
 })
 

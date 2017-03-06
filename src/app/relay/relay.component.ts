@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Relay } from '../relay';
+import { RelayService } from '../relay.service';
 
 @Component({
   selector: 'my-relay',
@@ -7,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RelayComponent implements OnInit {
   title = "Configure Relays"
+  relays: Relay[];
 
-  constructor() { }
+  constructor(private relayService: RelayService) { }
 
   ngOnInit() {
+    this.getRelays();
+  }
+
+  getRelays(): void {
+    this.relayService.getRelays().then(relays => this.relays = relays);
   }
 
 }
