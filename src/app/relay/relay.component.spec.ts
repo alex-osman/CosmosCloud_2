@@ -25,4 +25,14 @@ describe('RelayComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have as title `Configure Relays`', () => {
+    expect(component.title).toEqual('Configure Relays');
+  });
+
+  it('should render title in a h2 tag', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    console.log(compiled);
+    expect(compiled.querySelector('h2').textContent).toContain('Configure Relays');
+  });
 });

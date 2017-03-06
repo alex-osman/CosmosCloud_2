@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./relay.component.css']
 })
 export class RelayComponent implements OnInit {
+  title = "Configure Relays"
 
   constructor() { }
 
