@@ -4,20 +4,21 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home.component';
-import { RelaysComponent } from './relays.component';
-import { IndicatorsComponent }  from './indicators.component';
-import { FileShareComponent }  from './fileshare.component';
 
 import { AppRoutingModule }   from './app-routing.module';
+import { RelayComponent } from './relay/relay.component';
+import { FileshareComponent } from './fileshare/fileshare.component';
+import { IndicatorComponent } from './indicator/indicator.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    RelaysComponent,
-    IndicatorsComponent,
-    FileShareComponent
+    RelayComponent,
+    FileshareComponent,
+    IndicatorComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
