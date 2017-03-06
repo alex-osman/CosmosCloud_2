@@ -12,6 +12,7 @@ import { FileshareComponent } from './fileshare/fileshare.component';
 import { IndicatorComponent } from './indicator/indicator.component';
 import { HomeComponent } from './home/home.component';
 import { RelayService } from './relay.service';
+import { IndicatorService } from './indicator.service';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { RelayService } from './relay.service';
     RouterModule,
     AppRoutingModule
   ],
-  providers: [RelayService],
+  providers: [RelayService, IndicatorService],
   bootstrap: [AppComponent]
 })
 

@@ -1,1 +1,10 @@
-<h2>Configure Indicators</h2>
+<div class="row">
+  <div class="col-md-12" class="indicators">
+    <h2>{{title}}</h2>
+    <div *ngFor="let indicator of indicators">
+      <h3>{{indicator.name}}</h3><br>
+      <label>Style: </label>{{indicator.style}}<br>
+      <label>Color: </label>{{indicator.color}}
+    </div>
+  </div>
+</div>

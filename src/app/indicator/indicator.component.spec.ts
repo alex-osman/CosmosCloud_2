@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { IndicatorComponent } from './indicator.component';
+import { Indicator } from '../indicator';
+import { IndicatorService } from '../indicator.service';
 
 describe('IndicatorComponent', () => {
   let component: IndicatorComponent;
@@ -11,7 +13,8 @@ describe('IndicatorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IndicatorComponent ]
+      declarations: [ IndicatorComponent ],
+      providers: [ IndicatorService ]
     })
     .compileComponents();
   }));

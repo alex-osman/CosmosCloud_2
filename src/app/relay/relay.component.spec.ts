@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { RelayComponent } from './relay.component';
+import { RelayService } from '../relay.service';
+import { Relay } from '../relay';
 
 describe('RelayComponent', () => {
   let component: RelayComponent;
@@ -11,7 +13,8 @@ describe('RelayComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RelayComponent ]
+      declarations: [ RelayComponent ],
+      providers: [ RelayService ]
     })
     .compileComponents();
   }));

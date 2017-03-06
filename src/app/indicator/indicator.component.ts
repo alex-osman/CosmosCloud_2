@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Indicator } from '../indicator';
+import { IndicatorService } from '../indicator.service';
 
 @Component({
   selector: 'app-indicator',
@@ -6,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./indicator.component.css']
 })
 export class IndicatorComponent implements OnInit {
+  indicators: Indicator[];
+  title = "Configure Indicators";
 
-  constructor() { }
+  constructor(private indicatorService: IndicatorService) { }
 
   ngOnInit() {
+    this.getIndicators();
+  }
+
+  getIndicators(): void {
+    this.indicatorService.getIndicators().then(indicators => this.indicators = indicators);
   }
 
 }
