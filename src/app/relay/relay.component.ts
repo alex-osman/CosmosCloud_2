@@ -31,6 +31,7 @@ export class RelayComponent implements OnInit {
           if (node.modules[i].type == "relay")
             node.modules[i].channels[channelI].isOn = status;
         }
+        console.log(status);
         this.update(node);
       })
       .catch(something => console.log(something));

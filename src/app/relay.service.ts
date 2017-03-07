@@ -25,7 +25,7 @@ export class RelayService {
   toggle(node: Node, channelI: number): Promise<boolean> {
     return this.http.get(`${this.relayUrl}/${node._id}/toggle/${channelI}`)
       .toPromise()
-      .then(response => response.json()[channelI])
+      .then(response => JSON.parse(response.json())[channelI] as boolean)
       .catch(this.handleError);
   }
 

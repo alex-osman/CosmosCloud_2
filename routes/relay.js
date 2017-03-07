@@ -22,10 +22,11 @@ module.exports = function(app, request, n) {
 
       relayCall(node.ip, port, action, channel)
         .then(function(response) {
-          res.send(response);
+          res.json(response.body);
         })
         .catch(function(err) {
-          res.status(404).send(err);
+          console.log(err);
+          res.status(500).send(err);
         });
     });
   });
@@ -48,61 +49,62 @@ module.exports = function(app, request, n) {
           res.send(response);
         })
         .catch(function(err) {
-          res.status(404).send(err);
+          res.status(500).send(err);
         });
     });
   });
-};
 
-var relayCallWithoutChannel = function(ip, port, action) {
-  return relayCall(ip, port, action, "");
-};
 
-var relayCall = function(ip, port, action, channel) {
-  return new Promise(function(resolve, reject) {
-    request('http://' + node.ip + ':' + port + '/' + action + '/' + channel, function(err, res) {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(res);
+  var relayCallWithoutChannel = function(ip, port, action) {
+    return relayCall(ip, port, action, "");
+  };
+
+  var relayCall = function(ip, port, action, channel) {
+    return new Promise(function(resolve, reject) {
+      request('http://' + ip + ':' + port + '/' + action + '/' + channel, function(err, res) {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(res);
+      });
     });
-  });
 
-  app.get(baseUrl + '/all', function(req, res) {
-    getRelays(function(nodes) {
-      res.send(nodes);
-    })
-  })
-
-};
-
-
-
-//  Get all the Ips that have a Relay module tied to them
-var getRelays = function(callback) {
-  Node.find({'modules.type': 'relay'}).exec(function(err, nodes) {
-    assert.equal(err, null);
-    relays = [];
-    for (var i = 0; i < nodes.length; i++) {
-      relays.push({
-        id: nodes[i]._id,
-        name: nodes[i].name,
-        channels: [{
-          name: nodes[i].modules[1].channels[0].name,
-          isOn: nodes[i].modules[1].channels[0].isOn,
-        }, {
-          name: nodes[i].modules[1].channels[1].name,
-          isOn: nodes[i].modules[1].channels[1].isOn,
-        }]
+    app.get(baseUrl + '/all', function(req, res) {
+      getRelays(function(nodes) {
+        res.send(nodes);
       })
-    }
-    callback(relays);
-  });
-};
+    })
 
-var getIpFromId = function(id, cb) {
-  Node.findById(id).exec(function(err, node) {
-    cb(err, node);
-  });
-};
+  };
 
+
+
+  //  Get all the Ips that have a Relay module tied to them
+  var getRelays = function(callback) {
+    Node.find({'modules.type': 'relay'}).exec(function(err, nodes) {
+      assert.equal(err, null);
+      relays = [];
+      for (var i = 0; i < nodes.length; i++) {
+        relays.push({
+          id: nodes[i]._id,
+          name: nodes[i].name,
+          channels: [{
+            name: nodes[i].modules[1].channels[0].name,
+            isOn: nodes[i].modules[1].channels[0].isOn,
+          }, {
+            name: nodes[i].modules[1].channels[1].name,
+            isOn: nodes[i].modules[1].channels[1].isOn,
+          }]
+        })
+      }
+      callback(relays);
+    });
+  };
+
+  var getIpFromId = function(id, cb) {
+    Node.findById(id).exec(function(err, node) {
+      cb(err, node);
+    });
+  };
+
+};
