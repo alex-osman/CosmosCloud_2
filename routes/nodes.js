@@ -87,7 +87,23 @@ var deleteNode = function(node, callback) {
 
 // Adds a new ip to the database
 var addIP = function(ip, callback) {
-  Node.create({ 'ip': ip }, function(err, result) {
+  Node.create(
+    { 'ip': ip,
+      modules: [{
+        type: "relay", 
+        channels: [{
+          name: '',
+          isOn: false
+        }, {
+          name: '',
+          isOn: false
+        }]
+      }, {
+        type: "indicator",
+        style: "off",
+        color: [255, 255, 255]
+      }] 
+    }, function(err, result) {
     assert.equal(err, null);
     callback(result);
   });

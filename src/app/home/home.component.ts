@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NodeService } from '../node.service';
+import { Node } from '../node';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  nodes: Node[];
 
-  constructor() { }
+  constructor(private nodeService: NodeService) { }
 
   ngOnInit() {
+    this.getNodes()
+  }
+
+  getNodes(): void {
+    this.nodeService.getNodes().then((nodes) => this.nodes = nodes);
   }
 
 }

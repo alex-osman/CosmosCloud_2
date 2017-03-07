@@ -17,13 +17,14 @@ module.exports = function(app, request, n) {
     var channel = req.params.channel;
     var action = req.params.action;
     var id = req.params.id;
-
     getIpFromId(id, function(err, node) {
       assert.equal(err, null);
 
       request('http://' + node.ip + ':' + port + '/' + action + '/' + channel, function(error, response, body) {
         if (!error && response.statusCode === 200) {
           res.send(body);
+        } else {
+          res.statusCode(500).send({error: error});
         }
       });
     });
@@ -49,6 +50,37 @@ module.exports = function(app, request, n) {
         }
       });
     });
+  });
+
+  app.get(baseUrl + '/all', function(req, res) {
+    getRelays(function(nodes) {
+      res.send(nodes);
+    })
+  })
+
+};
+
+
+
+//  Get all the Ips that have a Relay module tied to them
+var getRelays = function(callback) {
+  Node.find({'modules.type': 'relay'}).exec(function(err, nodes) {
+    assert.equal(err, null);
+    relays = [];
+    for (var i = 0; i < nodes.length; i++) {
+      relays.push({
+        id: nodes[i]._id,
+        name: nodes[i].name,
+        channels: [{
+          name: nodes[i].modules[1].channels[0].name,
+          isOn: nodes[i].modules[1].channels[0].isOn,
+        }, {
+          name: nodes[i].modules[1].channels[1].name,
+          isOn: nodes[i].modules[1].channels[1].isOn,
+        }]
+      })
+    }
+    callback(relays);
   });
 };
 

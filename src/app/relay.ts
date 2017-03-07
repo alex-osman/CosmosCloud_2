@@ -2,6 +2,6 @@ import { Channel } from './channel';
 
 export class Relay {
   id: string;
-  name: string;
+  type: string;
   channels: Channel[];
 }

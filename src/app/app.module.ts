@@ -13,6 +13,7 @@ import { IndicatorComponent } from './indicator/indicator.component';
 import { HomeComponent } from './home/home.component';
 import { RelayService } from './relay.service';
 import { IndicatorService } from './indicator.service';
+import { NodeService } from './node.service';
 
 
 @NgModule({
@@ -31,8 +32,8 @@ import { IndicatorService } from './indicator.service';
     RouterModule,
     AppRoutingModule
   ],
-  providers: [RelayService, IndicatorService],
-  bootstrap: [AppComponent]
+  providers: [ NodeService, RelayService ],
+  bootstrap: [ AppComponent ]
 })
 
 export class AppModule { }

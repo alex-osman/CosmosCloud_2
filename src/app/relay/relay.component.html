@@ -1,20 +1,27 @@
 <div class="row">
   <div class="col-md-12">
-    <h2>{{title}}</h2>
-
+    <br>
     <!-- RELAY CARD -->
-    <div *ngFor="let relay of relays; let relayI = index" class="card" style="width: 20rem;">
-    <div class="card-header">
-      <h4 class="card-title">{{relay.name}}
-        <button class="btn btn-sm btn-secondary" (click)="all(relay, false)">All Off</button>
-        <button class="btn btn-sm btn-secondary" (click)="all(relay, true)">All On</button>
-      </h4>
-    </div>
-    <div class="card-block">
-      <div *ngFor="let channel of relay.channels; let channelI = index">
-        <label>{{channel.name}}</label>
-        <button class="btn btn-sm btn-secondary" [class.on]="channel.isOn" [class.off]="!channel.isOn" (click)="toggle(relayI, channelI)"><i class="fa fa-power-off" aria-hidden="true"></i></button>
+    <div *ngFor="let node of nodes; let nodeI = index" class="card" style="width: 20rem;">
+      
+      <div class="card-header">
+        <h4 class="card-title">{{node.name}}
+          <button class="btn btn-sm btn-secondary" (click)="all(node, false)">All Off</button>
+          <button class="btn btn-sm btn-secondary" (click)="all(node, true)">All On</button>
+        </h4>
       </div>
+
+      <div class="card-block">
+        <div *ngFor="let module of node.modules">
+          <div *ngIf="module.channels">
+            <div *ngFor="let channel of module.channels; let channelI = index">
+              <label>{{channel.name}}</label>
+              <button class="btn btn-sm btn-secondary" [class.on]="channel.isOn" [class.off]="!channel.isOn" (click)="toggle(node, channelI)"><i class="fa fa-power-off" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

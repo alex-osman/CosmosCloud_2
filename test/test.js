@@ -105,7 +105,6 @@ describe('RGBServer sending information to RGB on Python RGBServer', function() 
     });
   });
 });
-/*
 describe('Deleting a Node', function() {
   it('Deletes 127.0.0.1', function deleteNode(done) {
     request(server)
@@ -118,4 +117,4 @@ describe('Deleting a Node', function() {
         n: 1
       }, done);
   });
-});*/
+});
