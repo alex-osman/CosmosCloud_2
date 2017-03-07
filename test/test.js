@@ -7,11 +7,6 @@ describe('Loading express', function() {
       .get('/test')
       .expect(200, done);
   });
-  it('404 to /blah', function test404(done) {
-    request(server)
-      .get('/blah')
-      .expect(404, done);
-  });
 });
 
 describe('Start, configure, a node', function() {
