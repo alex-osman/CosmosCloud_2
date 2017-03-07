@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Relay } from '../relay';
+import { Channel } from '../channel';
 import { RelayService } from '../relay.service';
 
 @Component({
@@ -25,4 +26,11 @@ export class RelayComponent implements OnInit {
     this.relayService.toggle(relay, channel).then(r => this.relays[relay] = r);
   }
 
+  all(relay: Relay, allOn: boolean): void {
+    this.relayService.all(relay, allOn).then(r => relay = r); 
+  }
 }
+
+
+
+

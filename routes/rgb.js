@@ -45,6 +45,7 @@ module.exports = function(app, request, n, p) {
     var r = req.params.red;
     var g = req.params.green;
     var b = req.params.blue;
+    console.log("hello")
     getPort(function(ports) {
       getRgbIP(function(rgbIP) {
         rgbIP.forEach(function(ip) {
