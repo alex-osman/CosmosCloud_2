@@ -5,6 +5,10 @@ var nodeSchema = new mongoose.Schema({
     type: String,
     required: [true, 'IP Required']
   },
+  room: {
+    type: String,
+    default: ''
+  },
   name: {
     type: String,
     default: ''

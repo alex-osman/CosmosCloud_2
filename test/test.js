@@ -22,6 +22,7 @@ describe('Start, configure, a node', function() {
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
       .expect(function(res) {
+        console.log("jwifoejwiofjeiowjf")
         if (res.body.n === 1) {
           res.body.n = 0;
         }
@@ -99,12 +100,11 @@ describe('RGBServer sending information to RGB on Python RGBServer', function() 
     });
   });
   it('returns RGB status /rgb/0/off/1/2/3/', function() {
-    request(server).get('/rgb/0/1/2/3/', function(response, body) {
+    request(server).get('/rgb/0/off/1/2/3/', function(response, body) {
       expect(body).to.equal({style: 'off', rgb: [1, 2, 3]});
     });
   });
 });
-
 describe('Deleting a Node', function() {
   it('Deletes 127.0.0.1', function deleteNode(done) {
     request(server)

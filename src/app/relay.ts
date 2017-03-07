@@ -1,5 +1,7 @@
+import { Channel } from './channel';
+
 export class Relay {
   id: string;
-  name: string;
-  channels: Boolean[];
+  type: string;
+  channels: Channel[];
 }

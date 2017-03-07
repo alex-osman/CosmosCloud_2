@@ -1,1 +1,18 @@
-<h2>Welcome Home</h2>
+<div class="row">
+    <div class="col-md-12"><br>
+
+        <div *ngFor="let node of nodes" class="card">
+            <div class="card-header">
+                <h4 class="card-title">{{node.name}}</h4>
+            </div>
+
+            <div class="card-block">
+                <div *ngFor="let module of node.modules">
+                    <label>Type: </label>
+                    <p>{{module | json }}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

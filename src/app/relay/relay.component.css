@@ -1,9 +1,15 @@
-.relays div {
-    margin-bottom: 10px;
-    background-color: #E0F0FF;
-    padding-right: 25px;
-    padding-left: 25px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    border-radius: 15px;
+.on {
+    color: green;
+}
+.off {
+    color: red;
+}
+
+.card button {
+    float: right;
+    margin-left: 2px;
+}
+
+.card-title button {
+    font-size: 8pt;
 }

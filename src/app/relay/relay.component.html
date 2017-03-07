@@ -1,10 +1,27 @@
 <div class="row">
-  <div class="col-md-12" class="relays">
-    <h2>{{title}}</h2>
-    <div *ngFor="let relay of relays">
-      <h3>{{relay.name}}</h3><br>
-      <label>Channel 1: </label>{{relay.channels[0]}}<br>
-      <label>Channel 2: </label>{{relay.channels[1]}}<br>
+  <div class="col-md-12">
+    <br>
+    <!-- RELAY CARD -->
+    <div *ngFor="let node of nodes; let nodeI = index" class="card" style="width: 20rem;">
+      
+      <div class="card-header">
+        <h4 class="card-title">{{node.name}}
+          <button class="btn btn-sm btn-secondary" (click)="all(node, false)">All Off</button>
+          <button class="btn btn-sm btn-secondary" (click)="all(node, true)">All On</button>
+        </h4>
+      </div>
+
+      <div class="card-block">
+        <div *ngFor="let module of node.modules">
+          <div *ngIf="module.channels">
+            <div *ngFor="let channel of module.channels; let channelI = index">
+              <label>{{channel.name}}</label>
+              <button class="btn btn-sm btn-secondary" [class.on]="channel.isOn" [class.off]="!channel.isOn" (click)="toggle(node, channelI)"><i class="fa fa-power-off" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
