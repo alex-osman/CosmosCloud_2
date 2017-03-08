@@ -16,7 +16,7 @@ export class RelayService {
   constructor(private http: Http) { }
 
   getRelays(): Promise<Relay[]> {
-    return this.http.get(this.relayUrl + "/all")
+    return this.http.get(`${this.relayUrl}/all`)
       .toPromise()
       .then(response => response.json() as Relay[])
       .catch(this.handleError);

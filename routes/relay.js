@@ -70,8 +70,8 @@ module.exports = function(app, request, n) {
     });
 
     app.get(baseUrl + '/all', function(req, res) {
-      getRelays(function(nodes) {
-        res.send(nodes);
+      getRelays(function(relays) {
+        res.send(relays);
       })
     })
 
@@ -85,17 +85,21 @@ module.exports = function(app, request, n) {
       assert.equal(err, null);
       relays = [];
       for (var i = 0; i < nodes.length; i++) {
-        relays.push({
-          id: nodes[i]._id,
-          name: nodes[i].name,
-          channels: [{
-            name: nodes[i].modules[1].channels[0].name,
-            isOn: nodes[i].modules[1].channels[0].isOn,
-          }, {
-            name: nodes[i].modules[1].channels[1].name,
-            isOn: nodes[i].modules[1].channels[1].isOn,
-          }]
-        })
+        for (var j = 0; j < nodes[i].modules.length; j++) {
+          if (nodes[i].modules[j].type == "relay") {
+            relays.push({
+              id: nodes[i]._id,
+              name: nodes[i].name,
+              channels: [{
+                name: nodes[i].modules[j].channels[0].name,
+                isOn: nodes[i].modules[j].channels[0].isOn,
+              }, {
+                name: nodes[i].modules[j].channels[1].name,
+                isOn: nodes[i].modules[j].channels[1].isOn,
+              }]
+            })
+          }
+        }
       }
       callback(relays);
     });

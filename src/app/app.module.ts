@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
+import { ColorPickerModule } from 'angular2-color-picker';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule }   from './app-routing.module';
@@ -30,9 +31,10 @@ import { NodeService } from './node.service';
     FormsModule,
     HttpModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ColorPickerModule
   ],
-  providers: [ NodeService, RelayService ],
+  providers: [ NodeService, RelayService, IndicatorService ],
   bootstrap: [ AppComponent ]
 })
 

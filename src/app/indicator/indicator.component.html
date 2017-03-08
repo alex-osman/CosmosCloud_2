@@ -1,10 +1,30 @@
 <div class="row">
   <div class="col-md-12" class="indicators">
-    <h2>{{title}}</h2>
-    <div *ngFor="let indicator of indicators">
-      <h3>{{indicator.name}}</h3><br>
-      <label>Style: </label>{{indicator.style}}<br>
-      <label>Color: </label>{{indicator.color}}
+    <br>
+    <!-- INDICATOR CARD -->
+    <div *ngFor="let node of nodes; let nodeIndex = index " class="card" style="width: 20rem;">
+
+      <div class="card-header">
+        <h4 class="card-title">{{node.name}}</h4>
+      </div>
+
+      <div class="card-block">
+        <div *ngFor="let indicator of node.modules">
+          <div *ngIf="indicator.type == 'indicator'">
+            <label>Style: </label>{{indicator.style}}<br>
+            <label>Color: </label>{{indicator.color}}<br>
+            <span [(colorPicker)]="colors[nodeIndex]" 
+              [cpPosition]="'bottom'"
+              [cpOutputFormat]="'rgba'"
+              [style.color]="colors[nodeIndex]"
+              (colorPickerChange)="updateColors(nodeIndex)"
+              [cpPositionRelativeToArrow]="true">
+              <i class="fa fa-lightbulb-o fa-4x" aria-hidden="true"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

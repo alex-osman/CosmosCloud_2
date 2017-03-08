@@ -71,6 +71,8 @@ var connect = function(ip, callback) {
 
 // Adds settings to the database
 var configureNode = function(node, callback) {
+  if (node.modules[0].color)
+    console.log(node.modules[0].color)
   Node.update({ 'ip': node.ip }, node, function(err, result) {
     assert.equal(err, null);
     callback(result);

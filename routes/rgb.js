@@ -16,14 +16,17 @@ module.exports = function(app, request, n, p) {
     var style = req.params.style;
     getPort(function(ports) {
       getRgbIP(function(rgbIP) {
-        rgbIP.forEach(function(ip) {
+        rgbIP.forEach(function(ip, index) {
           console.log('http://' + ip.ip + ':' + ports.rgb + '/' + style);
           request('http://' + ip.ip + ':' + ports.rgb + '/' + style, function(err, response, body) {
-            if (!err && response.statusCode === 200) {
-              //  console.log(body);
-              res.send(body);
-            } else {
-              console.log(err);
+            if (index == rgbIP.length-1) {
+              if (!err && response.statusCode === 200) {
+                console.log(body);
+                res.send(body);
+              } else {
+                console.log(err);
+                res.send(err);
+              }
             }
           });
         });
@@ -45,28 +48,51 @@ module.exports = function(app, request, n, p) {
     var r = req.params.red;
     var g = req.params.green;
     var b = req.params.blue;
-    console.log("hello")
     getPort(function(ports) {
       getRgbIP(function(rgbIP) {
-        rgbIP.forEach(function(ip) {
-          console.log('http://' + ip.ip + ':' + ports.rgb + '/' + style + '/' + r + '/' + g + '/' + b);
-          request('http://' + ip.ip + ':' + ports.rgb + '/' + style + '/' + r + '/' + g + '/' + b, function(err, response, body) {
-            if (!err && response.statusCode === 200) {
-              //  console.log(body);
-              res.send(body);
-            } else {
-              console.log(err);
-            }
-          });
+        rgbIP.forEach(function(ip, index) {
+          if (ip._id == req.params.id) {
+            console.log('http://' + ip.ip + ':' + ports.rgb + '/' + style + '/' + r + '/' + g + '/' + b);
+            request('http://' + ip.ip + ':' + ports.rgb + '/' + style + '/' + r + '/' + g + '/' + b, function(err, response, body) {
+              if (!err && response.statusCode === 200) {
+                //  console.log(body);
+                res.send(body);
+              } else {
+                console.log(err);
+              }
+            });
+          }
         });
       });
     });
   });
+
+  app.get(baseUrl + '/all', function(req, res) {
+    getRgbIP(function(nodes) {
+      indicators = [];
+      for (var i = 0; i < nodes.length; i++) {
+        console.log(nodes[i])
+        for (var j = 0; j < nodes[i].modules.length; j++) {
+          if (nodes[i].modules[j].type == 'indicator') {
+            indicators.push({
+              id: nodes[i]._id,
+              style: nodes[i].modules[j].style,
+              type: 'indicator',
+              color: nodes[i].modules[j].color,
+            })
+          }
+        }
+      }
+      res.send(indicators);
+    })
+  })
+
+
 };
 
 //  Get all the Ips that have a RGB module tied to them
 var getRgbIP = function(callback) {
-  nodeDB.find({'modules.type': 'rgb'}).exec(function(err, ip) {
+  nodeDB.find({'modules.type': 'indicator'}).exec(function(err, ip) {
     assert.equal(err, null);
     callback(ip);
   });
