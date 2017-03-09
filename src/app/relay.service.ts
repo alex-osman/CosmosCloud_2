@@ -22,8 +22,22 @@ export class RelayService {
       .catch(this.handleError);
   }
 
+  on(node: Node): Promise<boolean> {
+    return this.http.get(`${this.relayUrl}/${node.ip}/on`)
+      .toPromise()
+      .then(response => JSON.parse(response.json()))
+      .catch(this.handleError);
+  }
+
+  off(node: Node): Promise<boolean> {
+    return this.http.get(`${this.relayUrl}/${node.ip}/off`)
+      .toPromise()
+      .then(response => JSON.parse(response.json()))
+      .catch(this.handleError);
+  }
+
   toggle(node: Node, channelI: number): Promise<boolean> {
-    return this.http.get(`${this.relayUrl}/${node._id}/toggle/${channelI}`)
+    return this.http.get(`${this.relayUrl}/${node.ip}/toggle/${channelI}`)
       .toPromise()
       .then(response => JSON.parse(response.json())[channelI] as boolean)
       .catch(this.handleError);

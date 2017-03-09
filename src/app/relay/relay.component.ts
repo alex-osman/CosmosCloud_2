@@ -37,6 +37,36 @@ export class RelayComponent implements OnInit {
       .catch(something => console.log(something));
   }
 
+  on(node: Node): void {
+    this.relayService.on(node)
+      .then((status) => {
+        for (var i = 0; i < node.modules.length; i++) {
+          if (node.modules[i].type == "relay") {
+            node.modules[i].channels[0].isOn = true;
+            node.modules[i].channels[1].isOn = true;
+          }
+        }
+        console.log(status);
+        this.update(node);
+      })
+      .catch(something => console.log(something));
+  }
+
+  off(node: Node): void {
+    this.relayService.off(node)
+      .then((status) => {
+        for (var i = 0; i < node.modules.length; i++) {
+          if (node.modules[i].type == "relay") {
+            node.modules[i].channels[0].isOn = false;
+            node.modules[i].channels[1].isOn = false;
+          }
+        }
+        console.log(status);
+        this.update(node);
+      })
+      .catch(something => console.log(something));
+  }
+
   update(node: Node): void {
     this.nodeService.update(node).then(n => node = n);
   }
@@ -46,7 +76,9 @@ export class RelayComponent implements OnInit {
       if (node.modules[i].type == "relay") {
         node.modules[i].channels.forEach((channel, index) => {
           if(channel.isOn != allOn) {
-            this.toggle(node, index);
+            this.on(node);
+          } else {
+            this.off(node);
           }
         })
       }

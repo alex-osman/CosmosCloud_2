@@ -7,51 +7,44 @@ module.exports = function(app, request, n) {
   Node = n;
 
   /*
-   * Send the :action to the specified :channel relay of :id
-   * @param {String} :id - The id from the database of the computer we will be communicating with
+   * Send the :action to the specified :channel relay of :ip
+   * @param {String} :ip - The ip from the database of the computer we will be communicating with
    * @param {String} :action - The action we will take on the relay
    * @param {String} :channel - The channel of the relay we intend to take the action on
    * @return {TODO} TODO
    */
-  app.get(baseUrl + '/:id/:action/:channel', (req, res) => {
+  app.get(baseUrl + '/:ip/:action/:channel', (req, res) => {
     var channel = req.params.channel;
     var action = req.params.action;
-    var id = req.params.id;
-    getIpFromId(id, function(err, node) {
-      assert.equal(err, null);
+    var ip = req.params.ip;
 
-      relayCall(node.ip, port, action, channel)
-        .then(function(response) {
-          res.json(response.body);
-        })
-        .catch(function(err) {
-          console.log(err);
-          res.status(500).send(err);
-        });
-    });
+    relayCall(ip, port, action, channel)
+      .then(function(response) {
+        res.json(response.body);
+      })
+      .catch(function(err) {
+        console.log(err);
+        res.status(500).send(err);
+      });
   });
 
   /*
-   * Send the :action to all relays of :id
-   * @param {String} :id - The id from the database of the computer we will be communicating with
+   * Send the :action to all relays of :ip
+   * @param {String} :ip - The ip from the database of the computer we will be communicating with
    * @param {String} :action - The action we will take on the relay
    * @return {TODO} TODO
    */
-  app.get(baseUrl + '/:id/:action', function(req, res) {
+  app.get(baseUrl + '/:ip/:action', function(req, res) {
     var action = req.params.action;
-    var id = req.params.id;
+    var ip = req.params.ip;
 
-    getIpFromId(id, function(err, node) {
-      assert.equal(err, null);
-
-      relayCallWithoutChannel(node.ip, port, action)
-        .then(function(response) {
-          res.send(response);
-        })
-        .catch(function(err) {
-          res.status(500).send(err);
-        });
-    });
+    relayCallWithoutChannel(ip, port, action)
+      .then(function(response) {
+        res.send(response);
+      })
+      .catch(function(err) {
+        res.status(500).send(err);
+      });
   });
 
 
@@ -76,8 +69,6 @@ module.exports = function(app, request, n) {
     })
 
   };
-
-
 
   //  Get all the Ips that have a Relay module tied to them
   var getRelays = function(callback) {
@@ -104,11 +95,5 @@ module.exports = function(app, request, n) {
       callback(relays);
     });
   };
-
-  var getIpFromId = function(id, cb) {
-    Node.findById(id).exec(function(err, node) {
-      cb(err, node);
-    });
-  };
-
 };
+
