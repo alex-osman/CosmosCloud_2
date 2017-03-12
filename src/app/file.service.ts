@@ -11,7 +11,7 @@ export class FileService {
   private fileUrl = "/api/files"; //Url to fileshare
   constructor(private http: Http) { }
 
-  getFiles(): Promise<Files[]> {
+  getFiles(): Promise<File[]> {
     return this.http.get(`${this.fileUrl}/all`)
       .toPromise()
       .then(response => response.json() as File[])
