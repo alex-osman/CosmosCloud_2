@@ -22,11 +22,25 @@ export class FileshareComponent {
   constructor(private fileService: FileService) { }
 
   ngOnInit() {
-    this.getFiles()
+    this.getFiles();
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      if (item.isSuccess) {
+        this.getFiles();
+      } else {
+        console.log("Not successful");
+        console.log(item)
+        console.log(response)
+        console.log(status)
+        console.log(headers)
+      }
+    }
   }
 
   getFiles(): void {
     this.fileService.getFiles().then((files) => this.files = files);
   }
   
+  remove(file): void {
+    this.fileService.deleteFile(file._id).then((res) => this.getFiles());
+  }
 }

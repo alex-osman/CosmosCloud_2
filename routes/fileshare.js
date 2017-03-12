@@ -1,5 +1,6 @@
 var assert = require('assert');
 var multer = require('multer');
+var fs = require('fs');
 var fileDB;
 
 module.exports = function(app, request, db) {
@@ -46,6 +47,23 @@ module.exports = function(app, request, db) {
       res.json(files);
     });
   });
+
+  app.delete(baseUrl + '/:id', function(req, res) {
+    fileDB.find({_id: req.params.id}, function(err, files) {
+      console.log(files);
+      var path = files[0].path;
+      console.log(path);
+      fs.unlink(path, function(err) {
+        if (err)
+          throw err;
+        fileDB.find({_id: req.params.id}).remove().exec(function(err, response) {
+          if (err)
+            throw err;
+          res.send(response);
+        })
+      })
+    })
+  })
 };
 
 var getFiles = function(callback) {

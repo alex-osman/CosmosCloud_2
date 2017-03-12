@@ -18,6 +18,13 @@ export class FileService {
       .catch(this.handleError);
   }
 
+  deleteFile(id: number): Promise<any> {
+    return this.http.delete(`${this.fileUrl}/${id}`)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.log("We have an error", error);
     return Promise.reject(error.message || error);
