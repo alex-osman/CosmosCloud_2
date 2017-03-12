@@ -11,7 +11,7 @@
       <div class="card-block">
         <div *ngFor="let indicator of node.modules">
           <div *ngIf="indicator.type == 'indicator'">
-            <label>Style: </label>{{indicator.style}}<br>
+            <label>Style: </label>On<br>
             <label>Color: </label>{{indicator.color}}<br>
             <span [(colorPicker)]="colors[nodeIndex]" 
               [cpPosition]="'bottom'"

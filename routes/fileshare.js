@@ -3,7 +3,7 @@ var multer = require('multer');
 var fileDB;
 
 module.exports = function(app, request, db) {
-  var DIR = './assets/';
+  var DIR = './src/assets/';
   var baseUrl = '/api/files';
   fileDB = db;
 
@@ -28,7 +28,6 @@ module.exports = function(app, request, db) {
 
   app.post(baseUrl, upload.any(), function(req, res) {
     //Add to database
-    console.log(req.files)
     fileDB.create({
       name: req.files[0].originalname.substring(0, req.files[0].originalname.lastIndexOf('.')),
       filetype: req.files[0].mimetype,
@@ -44,9 +43,6 @@ module.exports = function(app, request, db) {
 
   app.get(baseUrl + '/all', function(req, res) {
     getFiles(function(files) {
-      for (var i = 0; i < files.length; i++) {
-        console.log(files[i]);
-      }
       res.json(files);
     });
   });
