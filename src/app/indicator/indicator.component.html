@@ -11,9 +11,12 @@
       <div class="card-block">
         <div *ngFor="let indicator of node.modules">
           <div *ngIf="indicator.type == 'indicator'">
-            <label>Style: </label>On<br>
-            <label>Color: </label>{{indicator.color}}<br>
-            <span [(colorPicker)]="colors[nodeIndex]" 
+            <p>
+              <label>Style: </label>On<br>
+              <label>Color: </label>{{indicator.color}}<br>
+            </p>
+            <span class="bulb"
+              [(colorPicker)]="colors[nodeIndex]" 
               [cpPosition]="'bottom'"
               [cpOutputFormat]="'rgba'"
               [style.color]="colors[nodeIndex]"
