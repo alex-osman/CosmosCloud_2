@@ -1,30 +1,38 @@
-# CosmosCloud
+# Cosmos Cloud
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.31.
-On OSX the installtion is: 
-    npm update
-    npm install -g @angular/cli@latests
+The Cosmos Cloud is a smart-home system that is used to control the home (and beyond) through the use of modularized components connected to a central hub. Modules come in both a software and hardware form, interacting completely with the central server. This allows modules to interact with all other modules - giving complete control to the user to tailor to specific use cases, whether it be for accessibility, luxury, or other uses.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Installation:
+Cosmos Cloud requires node v6.9.0 and higher and NPM 3.0 and higher
 
-## Code scaffolding
+Install the dependencies start the server.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+  ```sh
+  $ cd CosmosCloud_SD
+  $ npm install 
+  $ brew install mongodb
+  $ npm run build
+  ```
 
-## Build
+Current feature list:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+  * Relay Module
+  * Indicator Module
+  * Fileshare
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Tech:
 
-## Running end-to-end tests
+  * [Angular](https://angular.io/) 
+  * [angularCLI](https://cli.angular.io/)
+  * [MongoDB](https://www.mongodb.com/)
+  * [Express](https://expressjs.com/)
+  * [Node.js](https://nodejs.org/en/)
+  * [Bootstrap](https://v4-alpha.getbootstrap.com/)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+### TODO:
+  * Theature Module
+  * Alarm Module
+  * RSSI module
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

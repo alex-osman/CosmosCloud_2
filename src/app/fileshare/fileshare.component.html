@@ -47,12 +47,14 @@
                 <th>Date</th>
                 <th>Size</th>
                 <th>Download</th>
+                <th>Delete</th>
             </tr>
             <tr *ngFor="let file of files">
                 <td>{{file.name}}</td>
                 <td>{{file.path.substring(file.path.indexOf('1489')) | date}}</td>
                 <td>{{file.size}}</td>
-                <td><a href="{{file.path.substring(3)}}">Download</a></td>
+                <td><a target="_self" href="{{file.path.substring(3)}}">Download</a></td>
+                <td (click)="remove(file)">x</td>
             </tr>
         </table>
     </div>
