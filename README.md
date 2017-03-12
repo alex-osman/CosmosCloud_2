@@ -4,6 +4,7 @@ The Cosmos Cloud is a smart-home system that is used to control the home (and be
 
 Installation:
 Cosmos Cloud requires node v6.9.0 and higher and NPM 3.0 and higher
+
 Install the dependencies start the server.
 
   ```sh
