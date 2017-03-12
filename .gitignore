@@ -39,5 +39,8 @@ jspm_packages
 # build dist
 /dist
 
+# this contains the upload files we do not want to bloat git
+/src/app/assets
+
 createCodeStyle.sh
 
