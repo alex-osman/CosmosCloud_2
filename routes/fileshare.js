@@ -3,37 +3,42 @@ var multer = require('multer');
 var fileDB;
 
 module.exports = function(app, request, db) {
-  var DIR = '../assets/files/';
-  var baseUrl = '/fileShare';
+  var DIR = './assets/';
+  var baseUrl = '/api/files';
   fileDB = db;
 
-  var upload = multer({dest: DIR});
-
-  app.get(baseUrl, function(req, res) {
-    res.end('file catcher example');
-  });
-
-  app.post(baseUrl, function(req, res) {
-    upload(req, res, function(err) {
-      if (err) {
-        return res.end(err.toString());
-      }
-      res.end('File is uploaded');
-    });
-  });
-
-  app.use(multer({
-    dest: DIR,
-    rename: function(fieldname, filename) {
-      return filename + Date.now();
+  var storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+      if (file.mimetype == 'image/jpeg')
+        callback(null, DIR + 'pictures');
+      else if (file.mimetype == 'video/quicktime')
+        callback(null, DIR + 'movies')
+      else if (file.mimetype.indexOf('officedocument') > 0)
+        callback(null, DIR + 'docs')
+      else callback(null, DIR + 'files')
     },
-    onFileUploadStart: function(file) {
-      console.log(file.originalname + ' is starting ...');
-    },
-    onFileUploadComplete: function(file) {
-      console.log(file.fieldname + ' uploaded to  ' + file.path);
+    filename: function(req, file, callback) {
+      callback(null, new Date().getTime() + "");
     }
-  }));
+  })
+  var upload = multer({
+    storage: storage,
+  });
+
+
+  app.post(baseUrl, upload.any(), function(req, res) {
+    //Add to database
+    fileDB.create({
+      name: req.files[0].originalname.substring(0, req.files[0].originalname.lastIndexOf('.')),
+      type: req.files[0].mimetype,
+      path: req.files[0].path
+    }, function(err, result) {
+      if (err)
+        throw err;
+      console.log(result);
+      res.end('File is uploaded');
+    })   
+  });
 
   app.get(baseUrl + '/all', function(req, rest) {
     getFiles(function(files) {

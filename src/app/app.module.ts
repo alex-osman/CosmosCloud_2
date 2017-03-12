@@ -9,6 +9,7 @@ import { ColorPickerModule } from 'angular2-color-picker';
 import { AppComponent } from './app.component';
 import { AppRoutingModule }   from './app-routing.module';
 import { RelayComponent } from './relay/relay.component';
+import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { FileshareComponent } from './fileshare/fileshare.component';
 import { IndicatorComponent } from './indicator/indicator.component';
 import { HomeComponent } from './home/home.component';
@@ -24,7 +25,9 @@ import { NodeService } from './node.service';
     RelayComponent,
     FileshareComponent,
     IndicatorComponent,
-    HomeComponent
+    HomeComponent,
+    FileSelectDirective,
+    FileDropDirective,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,7 @@ import { NodeService } from './node.service';
     HttpModule,
     RouterModule,
     AppRoutingModule,
-    ColorPickerModule
+    ColorPickerModule,
   ],
   providers: [ NodeService, RelayService, IndicatorService ],
   bootstrap: [ AppComponent ]

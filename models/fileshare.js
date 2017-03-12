@@ -4,7 +4,7 @@ var fileshareSchema = new mongoose.Schema({
   File: [{
     name: String,
     type: String,
-    dir: String
+    path: String
   }]
 });
 

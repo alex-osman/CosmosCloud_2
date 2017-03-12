@@ -16,7 +16,7 @@ console.log('Mongodb connected');
 // Models
 var Node = require('./models/node.js');
 var Ports = require('./models/ports.js');
-var Files = require('./models/fileshares.js');
+var Files = require('./models/fileshare.js');
 
 // Load modules
 require('./routes/relay.js')(app, request, Node);
