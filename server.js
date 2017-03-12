@@ -16,15 +16,17 @@ console.log('Mongodb connected');
 // Models
 var Node = require('./models/node.js');
 var Ports = require('./models/ports.js');
+var Files = require('./models/fileshares.js');
 
 // Load modules
 require('./routes/relay.js')(app, request, Node);
 require('./routes/rgb.js')(app, request, Node, Ports);
 require('./routes/nodes.js')(app, Node);
+require('./routes/fileshare.js')(app, request, Files);
 
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
-})
+});
 
 // Start server, listen to everything
 var port = 4200;
