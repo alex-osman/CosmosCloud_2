@@ -3,7 +3,10 @@
 The Cosmos Cloud is a smart-home system that is used to control the home (and beyond) through the use of modularized components connected to a central hub. Modules come in both a software and hardware form, interacting completely with the central server. This allows modules to interact with all other modules - giving complete control to the user to tailor to specific use cases, whether it be for accessibility, luxury, or other uses.
 
 Installation:
-Cosmos Cloud requires node v6.9.0 and higher and NPM 3.0 and higher
+
+Cosmos Cloud requires node v6.9.0 and higher and NPM 3.0 and higher.
+
+Requires [CosmosCould-Node-SD](https://github.com/alex-osman/CosmosCloud-Nodes-SD) to communicate with.
 
 Install the dependencies start the server.
 
