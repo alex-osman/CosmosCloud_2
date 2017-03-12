@@ -9,6 +9,7 @@ import { Node } from '../node';
 })
 export class HomeComponent implements OnInit {
   nodes: Node[];
+  private cosmosImage = require("./image/cosmos.jpg")
 
   constructor(private nodeService: NodeService) { }
 

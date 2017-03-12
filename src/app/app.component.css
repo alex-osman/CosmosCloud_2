@@ -1,3 +1,7 @@
+nav {
+  text-align: center;
+  vertical-align: top;
+}
 nav a {
   padding: 5px 10px;
   text-decoration: none;
@@ -15,4 +19,8 @@ nav a:hover {
 }
 nav a.active {
   color: #039be5;
+}
+
+h1 {
+  text-align: center;
 }
