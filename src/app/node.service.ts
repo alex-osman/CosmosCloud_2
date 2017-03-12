@@ -29,12 +29,8 @@ export class NodeService {
       .catch(this.handleError);
   }
 
-
-
-
   private handleError(error: any): Promise<any> {
     console.log("We have an error", error);
     return Promise.reject(error.message || error);
   }
-
 }

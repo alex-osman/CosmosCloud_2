@@ -28,10 +28,12 @@ module.exports = function(app, request, db) {
 
   app.post(baseUrl, upload.any(), function(req, res) {
     //Add to database
+    console.log(req.files)
     fileDB.create({
       name: req.files[0].originalname.substring(0, req.files[0].originalname.lastIndexOf('.')),
       filetype: req.files[0].mimetype,
-      path: req.files[0].path
+      path: req.files[0].path,
+      size: req.files[0].size
     }, function(err, result) {
       if (err)
         throw err;
@@ -40,11 +42,12 @@ module.exports = function(app, request, db) {
     })   
   });
 
-  app.get(baseUrl + '/all', function(req, rest) {
+  app.get(baseUrl + '/all', function(req, res) {
     getFiles(function(files) {
       for (var i = 0; i < files.length; i++) {
         console.log(files[i]);
       }
+      res.json(files);
     });
   });
 };

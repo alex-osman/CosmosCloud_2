@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { RelayService } from './relay.service';
 import { IndicatorService } from './indicator.service';
 import { NodeService } from './node.service';
+import { FileService } from './file.service';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { NodeService } from './node.service';
     AppRoutingModule,
     ColorPickerModule,
   ],
-  providers: [ NodeService, RelayService, IndicatorService ],
+  providers: [ NodeService, RelayService, IndicatorService, FileService ],
   bootstrap: [ AppComponent ]
 })
 

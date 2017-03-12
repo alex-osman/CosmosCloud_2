@@ -12,7 +12,11 @@ var fileshareSchema = new mongoose.Schema({
   path: {
     type: String,
     required: [true, 'path required']
+  },
+  size: {
+    type: Number,
+    required: [true, 'size required']
   }
-});
+}, { collection : 'fileshare' });
 
 module.exports = mongoose.model('Fileshare', fileshareSchema);
