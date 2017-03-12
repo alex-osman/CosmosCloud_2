@@ -1,5 +1,7 @@
 export class File {
   name: string,
   filetype: string,
-  path: string
+  path: string,
+  extension: string,
+  size: number
 }

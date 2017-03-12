@@ -13,6 +13,10 @@ var fileshareSchema = new mongoose.Schema({
     type: String,
     required: [true, 'path required']
   },
+  extension: {
+    type: String,
+    required: [true, 'extension required']
+  },
   size: {
     type: Number,
     required: [true, 'size required']

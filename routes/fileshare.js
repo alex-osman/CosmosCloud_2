@@ -33,7 +33,8 @@ module.exports = function(app, request, db) {
       name: req.files[0].originalname.substring(0, req.files[0].originalname.lastIndexOf('.')),
       filetype: req.files[0].mimetype,
       path: req.files[0].path,
-      size: req.files[0].size
+      size: req.files[0].size,
+      extension: req.files[0].originalname.substring(req.files[0].originalname.lastIndexOf('.'))
     }, function(err, result) {
       if (err)
         throw err;
