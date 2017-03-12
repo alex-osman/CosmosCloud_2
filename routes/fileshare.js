@@ -30,7 +30,7 @@ module.exports = function(app, request, db) {
     //Add to database
     fileDB.create({
       name: req.files[0].originalname.substring(0, req.files[0].originalname.lastIndexOf('.')),
-      type: req.files[0].mimetype,
+      filetype: req.files[0].mimetype,
       path: req.files[0].path
     }, function(err, result) {
       if (err)
