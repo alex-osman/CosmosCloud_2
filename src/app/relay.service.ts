@@ -25,14 +25,14 @@ export class RelayService {
   on(node: Node): Promise<boolean> {
     return this.http.get(`${this.relayUrl}/${node.ip}/on`)
       .toPromise()
-      .then(response => JSON.parse(response.json()))
+      .then(response => response.json().body)
       .catch(this.handleError);
   }
 
   off(node: Node): Promise<boolean> {
     return this.http.get(`${this.relayUrl}/${node.ip}/off`)
       .toPromise()
-      .then(response => JSON.parse(response.json()))
+      .then(response => response.json().body)
       .catch(this.handleError);
   }
 

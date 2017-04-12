@@ -38,6 +38,8 @@ module.exports = function(app, request, n) {
     var action = req.params.action;
     var ip = req.params.ip;
 
+    console.log(ip + " is " + action);
+
     relayCallWithoutChannel(ip, port, action)
       .then(function(response) {
         res.send(response);
