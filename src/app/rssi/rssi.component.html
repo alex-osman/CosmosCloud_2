@@ -1,6 +1,8 @@
-<h1>Events</h1>
-
-<select>
-	<option *ngFor="let node of nodes" [value]="node.value">{{node.name}}</option>
-</select>
-
+<div class="row">
+  <div class="col-md-12">
+		<h1>Events</h1>
+		<select [(ngModel)]="selectedNode">
+			<option *ngFor="let node of nodes" [ngValue]="node">{{node.name}}</option>
+		</select>
+	</div>
+</div>

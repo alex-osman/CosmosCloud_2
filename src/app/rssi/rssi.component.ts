@@ -15,8 +15,7 @@ import { RelayService } from '../relay.service';
 export class RSSIComponent implements OnInit {
 	nodes: Node[];
 
-	constructor(private nodeService: NodeService,
-		private relayService: RelayService) { }
+	constructor(private nodeService: NodeService) { }
 
     ngOnInit() {
  		this.getNodes();
@@ -25,5 +24,6 @@ export class RSSIComponent implements OnInit {
   	getNodes(): void {
     	this.nodeService.getNodes().then(nodes => this.nodes = nodes);
 	}
+
 
 }
