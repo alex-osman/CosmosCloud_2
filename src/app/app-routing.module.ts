@@ -5,14 +5,16 @@ import { HomeComponent } 		from './home/home.component';
 import { RelayComponent } from './relay/relay.component';
 import { IndicatorComponent }  from './indicator/indicator.component';
 import { FileshareComponent }  from './fileshare/fileshare.component';
+import { RSSIComponent }		from './rssi/rssi.component';	
 
 const routes: Routes = [
 
 	{ path: '', redirectTo: '/home', pathMatch: 'full' },
 	{ path: 'home',   component: HomeComponent },
 	{ path: 'relays', component: RelayComponent },
-	{ path: 'indicators', component: IndicatorComponent},
-	{ path: 'fileshare', component: FileshareComponent}
+	{ path: 'indicators', component: IndicatorComponent },
+	{ path: 'fileshare', component: FileshareComponent },
+	{ path: 'rssi', component: RSSIComponent }
 
 ];
 

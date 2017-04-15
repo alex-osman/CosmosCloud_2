@@ -12,6 +12,7 @@ import { RelayComponent } from './relay/relay.component';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { FileshareComponent } from './fileshare/fileshare.component';
 import { IndicatorComponent } from './indicator/indicator.component';
+import { RSSIComponent }     from './rssi/rssi.component';
 import { HomeComponent } from './home/home.component';
 import { RelayService } from './relay.service';
 import { IndicatorService } from './indicator.service';
@@ -26,6 +27,7 @@ import { FileService } from './file.service';
     RelayComponent,
     FileshareComponent,
     IndicatorComponent,
+    RSSIComponent,
     HomeComponent,
     FileSelectDirective,
     FileDropDirective,
