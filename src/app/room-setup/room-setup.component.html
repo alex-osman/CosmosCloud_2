@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-12">
+    <br>
+    <input type="text" [(ngModel)]="name">
+    <button *ngIf="!settingUp" class="btn btn-secondary" (click)="setup()">Setup New Room</button>
+    <button *ngIf="settingUp" class="btn btn-secondary" (click)="submitRoom()">Finish</button>
+    <br>
+    <p>{{message}}</p>
+    <p>{{currentRoom}}</p>
+    
+  </div>
+</div>

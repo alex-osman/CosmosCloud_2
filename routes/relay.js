@@ -17,15 +17,17 @@ module.exports = function(app, request, n) {
     var channel = req.params.channel;
     var action = req.params.action;
     var ip = req.params.ip;
-
+    
+    console.log("Starting relay request");
     relayCall(ip, port, action, channel)
-      .then(function(response) {
-        res.json(response.body);
-      })
-      .catch(function(err) {
-        console.log(err);
-        res.status(500).send(err);
-      });
+    .then(function(response) {
+      console.log("Finished relay request");
+      res.json(response.body);
+    })
+    .catch(function(err) {
+      console.log(err);
+      res.status(500).send(err);
+    });
   });
 
   /*
@@ -37,8 +39,6 @@ module.exports = function(app, request, n) {
   app.get(baseUrl + '/:ip/:action', function(req, res) {
     var action = req.params.action;
     var ip = req.params.ip;
-
-    console.log(ip + " is " + action);
 
     relayCallWithoutChannel(ip, port, action)
       .then(function(response) {
@@ -54,15 +54,33 @@ module.exports = function(app, request, n) {
     return relayCall(ip, port, action, "");
   };
 
-  var relayCall = function(ip, port, action, channel) {
+  var relayCall = (ip, port, action, channel) => {
     return new Promise(function(resolve, reject) {
-      request('http://' + ip + ':' + port + '/' + action + '/' + channel, function(err, res) {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(res);
+      Node.find({'ip': ip}).exec((err, nodes) => {
+        let node = nodes[0]
+        console.log("Requesting from " + ip);
+        request('http://' + ip + ':' + port + '/' + action + '/' + channel, function(err, res) {
+          if (err) {
+            reject(err);
+          }
+          console.log("Got response");
+          //Update node
+          node.modules
+            .find(module => module.type == 'relay')
+            .channels.forEach((channel, index) => channel.isOn = JSON.parse(res.body)[index])
+
+          //Save node
+          console.log("saving new node");
+          Node.update({'ip': ip}, node, (err, result) => {
+            assert.equal(err, null);
+            console.log(result);
+            resolve(res);
+          })
+        })
       });
     });
+  }
+    
 
     app.get(baseUrl + '/all', function(req, res) {
       getRelays(function(relays) {
@@ -70,7 +88,6 @@ module.exports = function(app, request, n) {
       })
     })
 
-  };
 
   //  Get all the Ips that have a Relay module tied to them
   var getRelays = function(callback) {
@@ -96,6 +113,5 @@ module.exports = function(app, request, n) {
       }
       callback(relays);
     });
-  };
-};
-
+  }
+}

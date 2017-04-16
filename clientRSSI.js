@@ -1,4 +1,5 @@
 const exec = require('child_process').exec
+const request = require('request')
 
 const r1 = process.argv[2]
 const r2 = process.argv[3]
@@ -54,4 +55,8 @@ let doToSignal = (action) => {
 }
 
 //Main 
-doToSignal((s) => console.log(s));
+doToSignal((s) => {
+  request('http://localhost:4200/rssi/' + s[0] + '/' + s[1] + '/' + s[2], (err, res) => {
+    console.log(s)
+  })
+})
