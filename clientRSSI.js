@@ -27,6 +27,14 @@ let parseSignal = () => {
   })
 }
 
+let getSignalValue = () => {
+  return new Promise((resolve, reject) => {
+    exec('airport -I | grep agrCtlRSSI', (stdin, stdout, stderr) => {
+      resolve(Math.abs(parseInt(stdout.trim().split(' ')[1])))
+    })
+  })
+}
+
 let getSignalValues = () => {
   return new Promise((resolve, reject) => {
     parseSignal()
@@ -47,16 +55,20 @@ let getSignalValues = () => {
 
 
 let doToSignal = (action) => {
-  getSignalValues()
+  getSignalValue()
   .then((s) => {
     action(s);
-    doToSignal(action);
+    setTimeout(() => {
+      doToSignal(action);
+    }, 500)
   })
 }
 
 //Main 
 doToSignal((s) => {
-  request('http://localhost:4200/rssi/' + s[0] + '/' + s[1] + '/' + s[2], (err, res) => {
-    console.log(s)
-  })
+  console.log(s);
+  //request('http://10.0.0.122:4200/rssi/' + s[0] + '/' + s[1] + '/' + s[2], (err, res) => {
+  //request('http://10.0.0.122:4200/rssi/' + s + '/' + s[1] + '/' + s[2], (err, res) => {
+    //console.log(res.body);
+  //})
 })
