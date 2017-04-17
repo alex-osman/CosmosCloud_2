@@ -18,10 +18,8 @@ module.exports = function(app, request, n) {
     var action = req.params.action;
     var ip = req.params.ip;
     
-    console.log("Starting relay request");
     relayCall(ip, port, action, channel)
     .then(function(response) {
-      console.log("Finished relay request");
       res.json(response.body);
     })
     .catch(function(err) {
@@ -58,22 +56,18 @@ module.exports = function(app, request, n) {
     return new Promise(function(resolve, reject) {
       Node.find({'ip': ip}).exec((err, nodes) => {
         let node = nodes[0]
-        console.log("Requesting from " + ip);
         request('http://' + ip + ':' + port + '/' + action + '/' + channel, function(err, res) {
           if (err) {
             reject(err);
           }
-          console.log("Got response");
           //Update node
           node.modules
             .find(module => module.type == 'relay')
             .channels.forEach((channel, index) => channel.isOn = JSON.parse(res.body)[index])
 
           //Save node
-          console.log("saving new node");
           Node.update({'ip': ip}, node, (err, result) => {
             assert.equal(err, null);
-            console.log(result);
             resolve(res);
           })
         })

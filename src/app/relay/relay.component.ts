@@ -17,7 +17,7 @@ export class RelayComponent implements OnInit {
     private relayService: RelayService) { }
 
   ngOnInit() {
-    this.getNodes();
+    this.refreshCycle();
   }
 
   getNodes(): void {
@@ -32,9 +32,9 @@ export class RelayComponent implements OnInit {
             node.modules[i].channels[channelI].isOn = status;
         }
         console.log(status);
-        this.update(node);
+        this.getNodes();
       })
-      .catch(something => console.log(something));
+      .catch(err => console.log(err));
   }
 
   on(node: Node): void {
@@ -47,9 +47,9 @@ export class RelayComponent implements OnInit {
         }
       }
       console.log(status);
-      this.update(node);
+      this.getNodes();
     })
-    .catch(something => console.log(something));
+    .catch(err => console.log(err));
   }
 
   off(node: Node): void {
@@ -61,9 +61,9 @@ export class RelayComponent implements OnInit {
           node.modules[i].channels[1].isOn = false;
         }
       }
-      this.update(node);
+      this.getNodes();
     })
-    .catch(something => console.log(something));
+    .catch(err => console.log(err));
   }
 
   update(node: Node): void {
@@ -71,19 +71,19 @@ export class RelayComponent implements OnInit {
   }
 
   all(node: Node, allOn: boolean): void {
-    for (var i = 0; i < node.modules.length; i++) {
-      if (node.modules[i].type == "relay") {
-        node.modules[i].channels.forEach((channel, index) => {
-          if(channel.isOn != allOn) {
-            console.log(channel)
-            this.on(node);
-          } else {
-            console.log("Turning " + channel)
-            this.off(node);
-          }
-        })
-      }
-    }
+    node.modules
+      .find(module => module.type == 'relay')
+      .channels.forEach(channel => {
+        if (channel.isOn != allOn)
+          this.on(node);
+        else this.off(node);
+      })
+  }
+
+  //This will refresh the status of the nodes every second
+  refreshCycle(): void {
+    this.getNodes()
+    setTimeout(() => this.refreshCycle(), 1000);
   }
 }
 

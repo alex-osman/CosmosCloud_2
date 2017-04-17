@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { Room } from './room';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -31,6 +32,28 @@ export class RssiService {
       .then(response => console.log(response))
       .catch(this.handleError)
   }
+
+  getRooms(): Promise<Room[]> {
+    return this.http.get(`${this.rssiUrl}/getRooms`)
+      .toPromise()
+      .then(response => response.json() as Room[])
+      .catch(this.handleError);
+  }
+
+  update(room): Promise<void> {
+    return this.http.post(`${this.rssiUrl}/updateRoom`, {"room": room})
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
+  }
+
+  delete(room): Promise<void> {
+    return this.http.delete(`${this.rssiUrl}/${room._id}`)
+      .toPromise()
+      .then(response => console.log(response))
+      .catch(this.handleError);
+  }
+
 
   private handleError(error: any): Promise<any> {
     console.log("We have an error", error);

@@ -7,6 +7,23 @@
     <br>
     <p>{{message}}</p>
     <p>{{currentRoom}}</p>
-    
+
+    <div *ngFor="let room of rooms" class="card" style="width: 20rem;">
+      <div class="card-header">
+        <h4 class="card-title">
+          <span *ngIf="!room.edit" >{{room.name}}</span>
+          <input *ngIf="room.edit" type="text" [(ngModel)]="room.name">
+          <button *ngIf="!room.edit" class="btn btn-sm btn-secondary" (click)="room.edit = true">Edit</button>
+          <button *ngIf="room.edit" class="btn btn-sm btn-secondary" (click)="save(room)">Save</button>
+          <button *ngIf="room.edit" class="btn btn-sm btn-secondary" (click)="cancel(room)">Cancel</button>
+          <button class="btn btn-sm btn-danger" (click)="delete(room)">Delete</button>
+        </h4>        
+      </div>
+
+      <div class="card-block">
+        <label>Enter: </label> {{room.enter_read}} <br>
+        <label>Leave: </label> {{room.leave_read}}<br>
+      </div>
+    </div>
   </div>
 </div>
