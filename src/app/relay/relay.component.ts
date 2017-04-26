@@ -12,16 +12,23 @@ import { RelayService } from '../relay.service';
 })
 export class RelayComponent implements OnInit {
   nodes: Node[];
+  edits: any[];
 
   constructor(private nodeService: NodeService,
     private relayService: RelayService) { }
 
   ngOnInit() {
+    this.edits = [false]
     this.refreshCycle();
   }
 
   getNodes(): void {
-    this.nodeService.getNodes().then(nodes => this.nodes = nodes);
+    this.nodeService.getNodes()
+    .then((nodes) => {
+      this.nodes = nodes;
+      this.edits = nodes.map(n => false);
+      console.log(this.edits);
+    })
   }
 
   toggle(node: Node, channelI: number): void {
@@ -67,7 +74,7 @@ export class RelayComponent implements OnInit {
   }
 
   update(node: Node): void {
-    this.nodeService.update(node).then(n => node = n);
+    this.nodeService.update(node).then(n => node = n).then(()=> this.getNodes());
   }
 
   all(node: Node, allOn: boolean): void {
@@ -80,10 +87,20 @@ export class RelayComponent implements OnInit {
       })
   }
 
+  cancel(node): void {
+    this.getNodes();
+  }
+
+  save(node): void {
+    this.update(node);
+  }
+
   //This will refresh the status of the nodes every second
   refreshCycle(): void {
-    this.getNodes()
-    setTimeout(() => this.refreshCycle(), 1000);
+    if (this.edits.filter(x => x).length < 1) {
+      this.getNodes()
+    }
+    setTimeout(() => this.refreshCycle(), 5000);
   }
 }
 

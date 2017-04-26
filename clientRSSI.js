@@ -68,7 +68,7 @@ let doToSignal = (action) => {
 doToSignal((s) => {
   console.log(s);
   //request('http://10.0.0.122:4200/rssi/' + s[0] + '/' + s[1] + '/' + s[2], (err, res) => {
-  //request('http://10.0.0.122:4200/rssi/' + s + '/' + s[1] + '/' + s[2], (err, res) => {
-    //console.log(res.body);
-  //})
+  request('http://localhost:4200/rssi/' + s + '/' + s[1] + '/' + s[2], (err, res) => {
+    console.log(res.body);
+  })
 })
