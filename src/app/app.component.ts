@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  moduleId: module.id+'',
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
-
-export class AppComponent {
-  title = 'Cosmos Cloud';
+export class AppComponent implements OnInit {
+    constructor(public router: Router) { }
+    ngOnInit() {
+        // this.router.navigate(['/login']);
+    }
 }
