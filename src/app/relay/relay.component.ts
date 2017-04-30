@@ -27,7 +27,6 @@ export class RelayComponent implements OnInit {
     .then((nodes) => {
       this.nodes = nodes;
       this.edits = nodes.map(n => false);
-      console.log(this.edits);
     })
   }
 
