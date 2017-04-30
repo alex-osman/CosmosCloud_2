@@ -1,8 +1,23 @@
+
+<br/><br/>
+
 <div class="row">
-  <div class="col-md-12">
-		<h1>Events</h1>
-		<select [(ngModel)]="selectedNode">
-			<option *ngFor="let node of nodes" [ngValue]="node">{{node.name}}</option>
+  	<div class="col-md-12">
+		<label>Choose a room</label>
+		<select [(ngModel)]="nodes" (nodeModelChange)="selectedNode=onChange($event)">
+			<option *ngFor="let node of nodes"[ngValue]="node">{{node.name}}</option>
 		</select>
-	</div>
+
+		<br/><br/>
+
+		<label>Choose an item</label>
+        <div *ngFor="let module of selectedNode.modules">
+          	<select [(ngModel)]="channels">
+	            <option *ngFor="let channel of module.channels">
+	              {{channel.name}}
+	             </option>
+            </select>
+        </div>
+    </div>
 </div>
+
