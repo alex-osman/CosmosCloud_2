@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-12">
+    <br>
+    <div *ngFor="let alarm of alarms" class="card" style="width: 20rem;">
+      <div class="card-header">
+        <h4 class="card-title">
+          <span *ngIf="!alarm.edit">{{alarm.name}}</span>
+          <input *ngIf="alarm.edit" type="text" [(ngModel)]="alarm.name">
+          <button *ngIf="!alarm.edit" class="btn btn-sm btn-secondary" (click)="alarm.edit = true">Edit</button>
+          <button *ngIf="alarm.edit" class="btn btn-sm btn-secondary" (click)="save(alarm)">Save</button>
+          <button *ngIf="alarm.edit" class="btn btn-sm btn-secondary" (click)="cancel(alarm)">Cancel</button>
+          <button class="btn btn-sm btn-danger" (click)="delete(alarm)">Delete</button>
+        </h4>
+      </div>
+      <div class="card-block">
+        <label>Cron Time: </label> {{alarm.cronDate}} <br>
+        <label>Trigger: </label> 
+        <div *ngFor="let t of alarm.trigger; let ti = index">
+          <span *ngIf="!alarm.edit">{{alarm.trigger[ti]}}</span>
+          <input *ngIf="alarm.edit" type="text" [(ngModel)]="alarm.trigger[ti]">
+        </div>
+          
+        <label>Active: </label> 
+        <i (click)="activate(alarm)" class="fa fa-2x" [ngClass]="alarm.active ? 'fa-circle text-success' : 'fa-circle-o text-danger'" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+</div>
