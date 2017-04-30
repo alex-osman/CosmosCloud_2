@@ -8,19 +8,15 @@ import { Alarm } from '../alarm';
   styleUrls: ['./alarm.component.css']
 })
 export class AlarmComponent implements OnInit {
-  message: String;
   alarms: Alarm[];
-
 
   constructor(private alarmService: AlarmService) { }
 
   ngOnInit() {
-    this.message = "Init";
     this.getAlarms();
   }
 
   getAlarms(): void {
-    this.message = "Fetching...";
     this.alarmService.getAlarms()
     .then(alarms => this.alarms = alarms)
   }
@@ -31,6 +27,11 @@ export class AlarmComponent implements OnInit {
 
   save(alarm): void {
     delete alarm.edit;
+    if (alarm.newTime) {
+      alarm.cronDate = '0 ' + alarm.newTime.substring(3) + ' ' + alarm.newTime.substring(0, 2) + ' * * *';
+      delete alarm.newTime;
+    }
+    alarm.trigger = alarm.trigger.filter(x => x.length > 0);
     this.alarmService.update(alarm)
     .then(() => this.getAlarms());
   }
@@ -38,6 +39,11 @@ export class AlarmComponent implements OnInit {
   activate(alarm): void {
     this.alarmService.activate(alarm)
     .then(() => this.getAlarms());
+  }
+
+  getTime(cronDate): Date {
+    let times = cronDate.split(' ').map(x => x == '*' ? 0 : x);
+    return new Date(2017, 1, 1, times[2], times[1], 0, 0);
   }
 
 }

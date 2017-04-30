@@ -15,24 +15,21 @@ export class AlarmService {
   getAlarms(): Promise<Alarm[]> {
     return this.http.get(`${this.alarmUrl}/getAlarms`)
       .toPromise()
-      .then((response) => {
-        console.log(response.json());
-        return response.json() as Alarm[];
-      })
+      .then(response => response.json() as Alarm[])
       .catch(this.handleError);
   }
 
   update(alarm): Promise<void> {
     return this.http.post(`${this.alarmUrl}/updateAlarm`, {'alarm': alarm})
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => {})
       .catch(this.handleError);
   }
 
   activate(alarm): Promise<void> {
     return this.http.get(`${this.alarmUrl}/activate/${alarm._id}`)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => {})
       .catch(this.handleError);
   }
 
