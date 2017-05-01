@@ -19,15 +19,15 @@ export class AlarmService {
       .catch(this.handleError);
   }
 
-  update(alarm): Promise<void> {
-    return this.http.post(`${this.alarmUrl}/updateAlarm`, {'alarm': alarm})
+  addAlarm(): Promise<void> {
+    return this.http.get(`${this.alarmUrl}/addAlarm`)
       .toPromise()
       .then(response => {})
       .catch(this.handleError);
   }
 
-  activate(alarm): Promise<void> {
-    return this.http.get(`${this.alarmUrl}/activate/${alarm._id}`)
+  update(alarm): Promise<void> {
+    return this.http.post(`${this.alarmUrl}/updateAlarm`, {'alarm': alarm})
       .toPromise()
       .then(response => {})
       .catch(this.handleError);

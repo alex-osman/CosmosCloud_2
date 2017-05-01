@@ -7,7 +7,7 @@ var alarmSchema = new mongoose.Schema({
   },
   trigger: {
     type: [String],
-    required: [true, 'Trigger Required']
+    default: []
   },
   cronDate: {
     type: String,

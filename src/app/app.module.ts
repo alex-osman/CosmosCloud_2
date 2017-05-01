@@ -21,6 +21,7 @@ import { RssiService } from './rssi.service';
 import { AlarmService } from './alarm.service';
 import { RoomSetupComponent } from './room-setup/room-setup.component';
 import { AlarmComponent } from './alarm/alarm.component';
+import { TriggerComponent } from './trigger/trigger.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { AlarmComponent } from './alarm/alarm.component';
     FileDropDirective,
     RoomSetupComponent,
     AlarmComponent,
+    TriggerComponent,
   ],
   imports: [
     BrowserModule,

@@ -37,13 +37,32 @@ export class AlarmComponent implements OnInit {
   }
 
   activate(alarm): void {
-    this.alarmService.activate(alarm)
+    alarm.active = !alarm.active;
+    this.alarmService.update(alarm)
     .then(() => this.getAlarms());
   }
 
   getTime(cronDate): Date {
     let times = cronDate.split(' ').map(x => x == '*' ? 0 : x);
     return new Date(2017, 1, 1, times[2], times[1], 0, 0);
+  }
+
+  deleteTrigger(trigger, alarm): void {
+    console.log(trigger);
+    alarm.trigger = alarm.trigger.filter(t => t != trigger)
+    console.log(alarm.trigger);
+    this.save(alarm);
+  }
+
+  addAlarm(): void {
+    this.alarmService.addAlarm()
+    .then(() => this.getAlarms())
+  }
+
+  onGetTrigger(trigger, alarm): void {
+    alarm.trigger.push(trigger);
+    console.log(alarm);
+    this.save(alarm);
   }
 
 }

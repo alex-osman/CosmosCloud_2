@@ -1,9 +1,11 @@
 <div class="row">
   <div class="col-md-12">
+    <button class="btn btn-default" (click)="addAlarm()">Add Alarm</button>
     <br>
     <div *ngFor="let alarm of alarms" class="card" style="width: 40rem;">
       <div class="card-header">
         <h4 class="card-title">
+          <i (click)="activate(alarm)" class="fa fa-lg" [ngClass]="alarm.active ? 'fa-toggle-on' : 'fa-toggle-off'" aria-hidden="true"></i>
           <span *ngIf="!alarm.edit">{{alarm.name}}</span>
           <input *ngIf="alarm.edit" type="text" [(ngModel)]="alarm.name">
           <button *ngIf="!alarm.edit" class="btn btn-sm btn-secondary" (click)="alarm.edit = true">Edit</button>
@@ -17,14 +19,11 @@
         <input *ngIf="alarm.edit" type="time" [(ngModel)]="alarm.newTime">
         <br>
         <label>Triggers: </label> 
-        <button class="btn btn-sm btn-primary" (click)="alarm.trigger.push('')">+</button>
-        <div *ngFor="let t of alarm.trigger; let ti = index">
-          <span *ngIf="!alarm.edit">{{alarm.trigger[ti]}}</span>
-          <input *ngIf="alarm.edit" type="text" [(ngModel)]="alarm.trigger[ti]">
-        </div>
-          
-        <label>Active: </label> 
-        <i (click)="activate(alarm)" class="fa fa-2x" [ngClass]="alarm.active ? 'fa-circle text-success' : 'fa-circle-o text-danger'" aria-hidden="true"></i>
+        <br>
+        <app-trigger *ngIf="alarm.edit" (onGetTrigger)="onGetTrigger($event, alarm)" ></app-trigger>
+        <div *ngFor="let t of alarm.trigger">
+          {{t}}<button *ngIf="alarm.edit" class="btn btn-sm btn-danger" (click)="deleteTrigger(t, alarm)">x</button>
+        </div> 
       </div>
     </div>
   </div>

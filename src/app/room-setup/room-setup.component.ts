@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ColorPickerService } from 'angular2-color-picker';
 import { RssiService } from '../rssi.service';
 import { Room } from '../room';
-import { Relay } from '../relay';
-import { Channel } from '../channel';
-import { Node } from '../node';
-import { NodeService } from '../node.service';
+
 
 @Component({
   selector: 'app-room-setup',
@@ -18,21 +14,13 @@ export class RoomSetupComponent implements OnInit {
   currentRoom: String;
   settingUp: Boolean;
   rooms: Room[];
-  nodes: Node[];
-  actions: Object;
 
-  constructor(private cpService: ColorPickerService,
-    private rssiService: RssiService,
-    private nodeService: NodeService) { }
+  constructor(private rssiService: RssiService) { }
 
   ngOnInit() {
     this.settingUp = false;
-    this.actions = {
-      'relay': ['on', 'off', 'toggle'],
-      'indicator': ['on', 'off']
-    }
+   
     this.getRooms();
-    this.getNodes();
     this.getLocation();
   }
 
@@ -64,11 +52,6 @@ export class RoomSetupComponent implements OnInit {
       rooms.forEach((room) => this.parseTrigger('leave', room))
       this.rooms = rooms;
     });
-  }
-
-  getNodes(): void {
-    this.nodeService.getNodes()
-    .then(nodes => this.nodes = nodes);
   }
 
   cancel(room): void {

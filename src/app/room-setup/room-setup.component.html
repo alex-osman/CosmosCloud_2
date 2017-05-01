@@ -26,6 +26,11 @@
           <label>Enter: </label> {{room.enter | json}}<br>
           <label>Leave: </label> {{room.leave | json}}
         </div>
+        <div *ngIf="room.edit">
+          <label>Enter: </label> <app-trigger></app-trigger>
+          <label>Leave: </label> <app-trigger></app-trigger>
+        </div>
+
 
 
 
