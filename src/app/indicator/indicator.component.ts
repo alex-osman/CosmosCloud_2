@@ -41,15 +41,14 @@ export class IndicatorComponent implements OnInit {
     var c = [parseInt(t[0]), parseInt(t[1]), parseInt(t[2].substring(0, t[2].length-1))];
     this.nodes[n].modules.forEach((module) => {
       if (module.type == 'indicator') {
-        console.log(t);
-        console.log(c);
         module.color[0] = c[0];
         module.color[1] = c[1];
         module.color[2] = c[2];
         this.indicatorService.setColor(c, this.nodes[n]._id)
           .then((p) => {
             this.nodeService.update(this.nodes[n])
-              .then(n => console.log(n))
+              .then(n => n)
+              .catch(e => console.log(e))
           });
       }
     })

@@ -18,7 +18,10 @@ import { IndicatorService } from './indicator.service';
 import { NodeService } from './node.service';
 import { FileService } from './file.service';
 import { RssiService } from './rssi.service';
+import { AlarmService } from './alarm.service';
 import { RoomSetupComponent } from './room-setup/room-setup.component';
+import { AlarmComponent } from './alarm/alarm.component';
+import { TriggerComponent } from './trigger/trigger.component';
 
 
 @NgModule({
@@ -32,6 +35,8 @@ import { RoomSetupComponent } from './room-setup/room-setup.component';
     FileSelectDirective,
     FileDropDirective,
     RoomSetupComponent,
+    AlarmComponent,
+    TriggerComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,7 @@ import { RoomSetupComponent } from './room-setup/room-setup.component';
     AppRoutingModule,
     ColorPickerModule,
   ],
-  providers: [ NodeService, RelayService, IndicatorService, FileService, RssiService ],
+  providers: [ NodeService, RelayService, IndicatorService, FileService, RssiService, AlarmService ],
   bootstrap: [ AppComponent ]
 })
 

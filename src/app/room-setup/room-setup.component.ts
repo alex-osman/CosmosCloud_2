@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RssiService } from '../rssi.service';
 import { Room } from '../room';
 
+
 @Component({
   selector: 'app-room-setup',
   templateUrl: './room-setup.component.html',
@@ -18,6 +19,7 @@ export class RoomSetupComponent implements OnInit {
 
   ngOnInit() {
     this.settingUp = false;
+   
     this.getRooms();
     this.getLocation();
   }
@@ -43,6 +45,7 @@ export class RoomSetupComponent implements OnInit {
   }
 
   getRooms(): void {
+    console.log("getting rooms");
     this.rssiService.getRooms()
     .then(rooms => {
       rooms.forEach((room) => this.parseTrigger('enter', room))
@@ -57,6 +60,7 @@ export class RoomSetupComponent implements OnInit {
 
   save(room): void {
     delete room.edit;
+    delete room.triggerObj;
     this.rssiService.update(room)
     .then(() => this.getRooms());
   }

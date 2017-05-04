@@ -124,24 +124,24 @@ module.exports = (app, request, r) => {
     if (!room)
       return;
     currentRoom = room;
-    room.enter.forEach((url) => {
+    /*room.enter.forEach((url) => {
       request(url, (err, res) => {
         if (err)
           throw err;
       })
-    })
+    })*/
     console.log('Entered ' + room.name);
   }
 
   let leave = (room) => {
     if (!room)
       return;
-    room.leave.forEach((url) => {
+    /*room.leave.forEach((url) => {
       request(url, (err, res) => {
         if (err)
           throw err;
       })
-    })
+    })*/
     console.log('Left ' + room.name);
   }
 }

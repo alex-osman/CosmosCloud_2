@@ -6,6 +6,7 @@ import { RelayComponent } from './relay/relay.component';
 import { IndicatorComponent }  from './indicator/indicator.component';
 import { FileshareComponent }  from './fileshare/fileshare.component';
 import { RoomSetupComponent }  from './room-setup/room-setup.component';
+import { AlarmComponent }  from './alarm/alarm.component';
 
 const routes: Routes = [
 
@@ -14,7 +15,8 @@ const routes: Routes = [
 	{ path: 'relays', component: RelayComponent },
 	{ path: 'indicators', component: IndicatorComponent},
 	{ path: 'fileshare', component: FileshareComponent},
-  { path: 'rooms', component: RoomSetupComponent}
+  { path: 'rooms', component: RoomSetupComponent},
+	{ path: 'alarms', component: AlarmComponent}
 
 ];
 

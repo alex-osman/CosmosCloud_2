@@ -18,6 +18,7 @@ const Node = require('./models/node.js');
 const Ports = require('./models/ports.js');
 const Files = require('./models/fileshare.js');
 const Room = require('./models/room.js')
+const alarm = require('./models/alarm.js')
 
 // Load modules
 require('./routes/relay.js')(app, request, Node);
@@ -25,6 +26,7 @@ require('./routes/rgb.js')(app, request, Node, Ports);
 require('./routes/nodes.js')(app, Node);
 require('./routes/fileshare.js')(app, request, Files);
 require('./routes/rssi.js')(app, request, Room);
+require('./routes/alarm.js')(app, request, alarm);
 
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'dist/index.html'));

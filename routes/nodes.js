@@ -41,7 +41,7 @@ module.exports = function(app, n) {
 // Sets it up with the correct modules
 var connect = function(ip, callback) {
   // Check database for information about ip
-  lookupIP(ip, function(dbNodes) {
+  lookupIP(ip, (dbNodes) => {
     if (dbNodes.length === 1) {
       var node = dbNodes[0];
 
@@ -51,6 +51,7 @@ var connect = function(ip, callback) {
         callback(node.modules);
       } else {
         // This pi hasn't been set up yet
+        // This should never happen because we have a default
         console.log('Input settings for ' + ip + ' on the website');
         callback('NO MODULES');
       }
@@ -90,14 +91,15 @@ var deleteNode = function(node, callback) {
 // Adds a new ip to the database
 var addIP = function(ip, callback) {
   Node.create(
-    { 'ip': ip,
+    { ip: ip,
+      name: 'newnode',
       modules: [{
         type: "relay", 
         channels: [{
-          name: '',
+          name: 'channel1',
           isOn: false
         }, {
-          name: '',
+          name: 'channel2',
           isOn: false
         }]
       }, {
@@ -107,6 +109,7 @@ var addIP = function(ip, callback) {
       }] 
     }, function(err, result) {
     assert.equal(err, null);
+    console.log(result);
     callback(result);
   });
 };

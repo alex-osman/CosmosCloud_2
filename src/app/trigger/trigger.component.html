@@ -1,0 +1,34 @@
+<div>
+  <!--SELECT NODE-->
+  <select [(ngModel)]="node">
+    <option *ngFor="let n of nodes" [ngValue]="n">{{n.name}}</option>
+  </select>
+
+  <!--SELECT MODULE-->
+  <select *ngIf="node != null" [(ngModel)]="module">
+    <option *ngFor="let m of node.modules" [ngValue]="m">{{m.type}}</option>
+  </select>
+
+  <!--SELECT ACTION-->
+  <select *ngIf="module != null" [(ngModel)]="action">
+    <option *ngFor="let a of actions[module.type]" [ngValue]="a">{{a}}</option>
+  </select>
+
+  <!--SELECT VALUE-->        
+  <select *ngIf="module != null && module.type == 'relay' && action != null" [(ngModel)]="value">
+    <option>All</option>
+    <option *ngFor="let c of module.channels; let cI = index" [ngValue]="cI">{{c.name}}</option>
+  </select>
+  <span class="bulb"
+    *ngIf="module != null && module.type == 'indicator' && action != null"
+    [(colorPicker)]="value"
+    [cpPosition]="'bottom'"
+    [cpOutputFormat]="'rgba'"
+    [style.color]="value"
+    [cpFallbackColor]="'#000'"
+    [cpPositionRelativeToArrow]="true">
+    <i class="fa fa-lightbulb-o fa-2x" aria-hidden="true"></i>
+  </span>
+
+  <button *ngIf="value != null" class="btn btn-sm btn-success" (click)="getTrigger()">+</button>
+</div>

@@ -26,6 +26,7 @@
     "bootstrap": "^4.0.0-alpha.6",
     "chai": "^3.5.0",
     "core-js": "^2.4.1",
+    "cron": "^1.2.1",
     "font-awesome": "^4.7.0",
     "fontawesome": "^4.7.2",
     "mocha": "^3.2.0",

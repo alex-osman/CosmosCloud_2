@@ -22,12 +22,9 @@ export class IndicatorService {
 
   setColor(color: number[], id: string): Promise<any> {
     const url = `${this.indicatorUrl}/${id}/on/${color[0]}/${color[1]}/${color[2]}`
-    console.log(url);
     return this.http.get(url)
       .toPromise()
-      .then((response) => {
-        console.log(response.toString())
-      })
+      .then(response => response)
       .catch(this.handleError);
   }
 
