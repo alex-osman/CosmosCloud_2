@@ -47,4 +47,5 @@ createCodeStyle.sh
 .DS_Store
 src/.DS_Store
 src/app/.DS_Store
+src/app/shared/.DS_Store
 
