@@ -1,28 +1,15 @@
-import { NgModule }				from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-
-import { HomeComponent } 		from './home/home.component';
-import { RelayComponent } from './relay/relay.component';
-import { IndicatorComponent }  from './indicator/indicator.component';
-import { FileshareComponent }  from './fileshare/fileshare.component';
-import { RoomSetupComponent }  from './room-setup/room-setup.component';
-import { AlarmComponent }  from './alarm/alarm.component';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-
-	{ path: '', redirectTo: '/home', pathMatch: 'full' },
-	{ path: 'home',   component: HomeComponent },
-	{ path: 'relays', component: RelayComponent },
-	{ path: 'indicators', component: IndicatorComponent},
-	{ path: 'fileshare', component: FileshareComponent},
-  { path: 'rooms', component: RoomSetupComponent},
-	{ path: 'alarms', component: AlarmComponent}
+    { path: '', loadChildren: './layout/layout.module#LayoutModule' },
+    { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
+    { path: '**', redirectTo: 'not-found' }
 
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
-
 export class AppRoutingModule { }
