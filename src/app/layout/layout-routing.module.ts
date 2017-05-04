@@ -7,10 +7,11 @@ const routes: Routes = [
         path: '', component: LayoutComponent,
         children: [
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-            { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
             { path: 'relay', loadChildren: './relay/relay.module#RelayModule' },
             { path: 'fileshare', loadChildren: './fileshare/fileshare.module#FileshareModule' },
-            { path: 'indicator', loadChildren: './indicator/indicator.module#IndicatorModule' }
+            { path: 'indicator', loadChildren: './indicator/indicator.module#IndicatorModule' },
+            { path: 'alarm', loadChildren: './alarm/alarm.module#AlarmModule' },
+            { path: 'room-setup', loadChildren: './room-setup/room-setup.module#RoomSetupModule'}
         ]
     }
 ];
