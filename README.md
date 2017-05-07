@@ -39,3 +39,12 @@ Current feature list:
   * RSSI module
 
 
+
+
+### TESTING:
+
+UI testing done with [Protractor](http://www.protractortest.org/#/)
+ * Run the node server (npm run build)
+ * Run the selenium server (webdriver-manager update; webdriver-manager start)
+ * Run the protractor command (protractor conf.js)
+
