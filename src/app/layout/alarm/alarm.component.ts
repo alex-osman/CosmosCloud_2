@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+import { NodeService } from '../node.service';
 import { AlarmService } from '../alarm.service';
 import { Alarm } from '../alarm';
 
@@ -23,6 +25,11 @@ export class AlarmComponent implements OnInit {
 
   cancel(alarm): void {
     this.getAlarms();
+  }
+
+  delete(alarm: Alarm): void {
+    this.alarmService.delete(alarm._id)
+    .then(() => this.getAlarms())
   }
 
   save(alarm): void {

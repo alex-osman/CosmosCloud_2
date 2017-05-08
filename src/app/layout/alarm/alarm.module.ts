@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AlarmRoutingModule } from './alarm-routing.module';
 import { AlarmComponent } from './alarm.component';
 import { AlarmService } from './../alarm.service';
-import { ColorPickerModule } from 'ngx-color-picker';
+import { NodeService } from './../node.service';
+import { ColorPickerModule } from 'angular2-color-picker';
 import { TriggerModule } from './../../shared';
 
 
@@ -17,7 +18,7 @@ import { TriggerModule } from './../../shared';
     TriggerModule,
     ColorPickerModule
   ],
-  providers: [AlarmService],
+  providers: [AlarmService, NodeService],
   declarations: [AlarmComponent]
 })
 export class AlarmModule { }

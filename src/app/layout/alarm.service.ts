@@ -33,6 +33,13 @@ export class AlarmService {
       .catch(this.handleError);
   }
 
+  delete(alarmId): Promise<void> {
+    return this.http.delete(`${this.alarmUrl}/${alarmId}`)
+      .toPromise()
+      .then(response => {})
+      .catch(this.handleError);
+  }
+
 
   private handleError(error: any): Promise<any> {
     console.log("We have an error", error);

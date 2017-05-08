@@ -1,9 +1,9 @@
 import { Component, OnInit, EventEmitter, Input, Output} from '@angular/core';
-import { ColorPickerService } from 'ngx-color-picker';
+import { ColorPickerService } from 'angular2-color-picker';
 import { Relay } from './../../services/relay';
 import { Channel } from './../../services/channel';
 import { Node } from './../../services/node';
-import { NodeService } from './../../services/node/node.service';
+import { NodeService } from '../../services/node/node.service';
 
 
 @Component({
