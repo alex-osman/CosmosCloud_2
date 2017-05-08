@@ -67,7 +67,8 @@ export class AlarmComponent implements OnInit {
   }
 
   onGetTrigger(trigger, alarm): void {
-    alarm.trigger.push(trigger);
+    alarm.trigger.push(trigger.url);
+    alarm.triggerString.push(trigger.triggerString)
     console.log(alarm);
     this.save(alarm);
   }

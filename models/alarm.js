@@ -9,6 +9,10 @@ var alarmSchema = new mongoose.Schema({
     type: [String],
     default: []
   },
+  triggerString: {
+    type: [String],
+    default: []
+  },
   cronDate: {
     type: String,
     required: [true, 'Cron Date Required']

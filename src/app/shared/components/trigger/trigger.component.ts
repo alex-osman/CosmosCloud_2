@@ -12,7 +12,7 @@ import { NodeService } from '../../services/node/node.service';
   styleUrls: ['./trigger.component.css']
 })
 export class TriggerComponent implements OnInit {
-  @Output() onGetTrigger = new EventEmitter<string>();
+  @Output() onGetTrigger = new EventEmitter();
 
 
   nodes: Node[];
@@ -40,6 +40,7 @@ export class TriggerComponent implements OnInit {
 
   getTrigger() {
     let ret = "http://localhost:4200/"
+    let triggerString = "";
 
     console.log(this.node);
     console.log(this.module);
@@ -48,18 +49,24 @@ export class TriggerComponent implements OnInit {
 
     if (this.module.type == 'relay') {
       ret += 'relay/' + this.node.ip + '/' + this.action;
+      triggerString = "Turn " + this.node.name + " " + this.action
       if (!Number.isNaN(parseInt(this.value))) {
         ret += '/' + this.value;
+        triggerString = "Turn " + this.node.name + " " + this.module.channels[parseInt(this.value)].name + " " + this.action;
       }
     } else if (this.module.type == 'indicator') {
       let colors = this.value.substring(4).split(',').map(x => parseInt(x));
 
       ret += 'rgb/' + this.node._id + '/' + this.action;
       ret += '/' + colors[0] + '/' + colors[1] + '/' + colors[2];
+      triggerString = "Turn " + this.node.name + " rgb " + this.action + " to " + colors
     } else {
       console.log("Not sure what you're trying to save here...");
     }
-    this.onGetTrigger.emit(ret);
+    this.onGetTrigger.emit({
+      url: ret,
+      triggerString
+    });
     console.log("Emitted: " + ret);
   }
 

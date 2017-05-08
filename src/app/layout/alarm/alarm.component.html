@@ -21,7 +21,7 @@
         <label>Triggers: </label> 
         <br>
         <app-trigger *ngIf="alarm.edit" (onGetTrigger)="onGetTrigger($event, alarm)" ></app-trigger>
-        <div *ngFor="let t of alarm.trigger">
+        <div *ngFor="let t of alarm.triggerString">
           {{t}}<button *ngIf="alarm.edit" class="btn btn-sm btn-danger" (click)="deleteTrigger(t, alarm)">x</button>
         </div> 
       </div>
