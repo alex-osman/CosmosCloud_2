@@ -28,8 +28,8 @@
         "../node_modules/tether/dist/js/tether.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js"
       ],
-      "environments": {
-        "source": "environments/environment.ts",
+      "environmentSource": "environments/environment.ts",
+      "environment" : {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
