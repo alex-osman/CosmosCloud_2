@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RssiService } from '../rssi.service';
+import { RssiService } from './../../shared/services/rssi/rssi.service';
 import { Room } from '../room';
 
 
@@ -27,13 +27,23 @@ export class RoomSetupComponent implements OnInit {
   setup(): void {
     this.settingUp = true;
     this.message = "Processing " + this.name + "...";
+    setTimeout(() => {
+      this.message = "Walk around the room"
+    }, 2000)
+    setTimeout(() => {
+      this.message = "You may now finish room setup"
+    }, 10000)
     this.rssiService.setupRoom()
   }
 
   submitRoom(): void {
     this.settingUp = false;
     this.message = "Finishing...";
-    this.rssiService.submitRoom(this.name).then(() => this.getRooms())
+    this.rssiService.submitRoom(this.name)
+    .then(() => {
+      this.getRooms();
+      this.message = "Room setup complete"
+    })
   }
 
   getLocation(): void {
@@ -48,8 +58,6 @@ export class RoomSetupComponent implements OnInit {
     console.log("getting rooms");
     this.rssiService.getRooms()
     .then(rooms => {
-      rooms.forEach((room) => this.parseTrigger('enter', room))
-      rooms.forEach((room) => this.parseTrigger('leave', room))
       this.rooms = rooms;
     });
   }
@@ -70,33 +78,11 @@ export class RoomSetupComponent implements OnInit {
     .then(() => this.getRooms());
   }
 
-  parseTrigger(enterOrLeave, room): void {
-    room[enterOrLeave].forEach((url) => {
-      let path = url.substring(url.indexOf(':4200') + 6);
-      let params = path.split('/');
-      if (params.length === 3 || params.length === 4) {
-        if (params[0] === 'relay') {
-          //params = {"0": relay, "1": ip, "2": action, ("3": channel)}
-          //Check if all channels or only one
-          if (params.length === 3) {
-            //All channels
-            if (params[2] === 'toggle') {
-              room[enterOrLeave + '_read'] = 'Toggle ' + params[1];
-            } else {
-              room[enterOrLeave + '_read'] = 'Turn ' + params[1] + ' ' + params[2];
-            }
-          } else {
-            //One channel
-            if (params[2] === 'toggle') {
-              room[enterOrLeave + '_read'] = 'Toggle ' + params[1] + ':' + params[3];
-            } else {
-              room[enterOrLeave + '_read'] = 'Turn ' + params[1] + ':' + params[3] + ' ' + params[2];
-            }
-          }
-        }
-      }
-    })
-
+  onGetTrigger(trigger, room, action): void {
+    room[action].push(trigger.url);
+    room[action + "String"].push(trigger.triggerString)
+    console.log(room);
+    this.save(room);
   }
 
 
