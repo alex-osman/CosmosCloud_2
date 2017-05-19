@@ -9,8 +9,4 @@ describe('AlarmService', () => {
       providers: [AlarmService]
     });
   });
-
-  it('should ...', inject([AlarmService], (service: AlarmService) => {
-    expect(service).toBeTruthy();
-  }));
 });

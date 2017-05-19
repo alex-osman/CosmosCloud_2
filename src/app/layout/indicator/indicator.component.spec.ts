@@ -6,6 +6,7 @@ import { DebugElement } from '@angular/core';
 import { IndicatorComponent } from './indicator.component';
 import { Indicator } from '../indicator';
 import { IndicatorService } from '../indicator.service';
+import { ColorPickerService } from 'angular2-color-picker';
 
 describe('IndicatorComponent', () => {
   let component: IndicatorComponent;
@@ -23,9 +24,5 @@ describe('IndicatorComponent', () => {
     fixture = TestBed.createComponent(IndicatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 });

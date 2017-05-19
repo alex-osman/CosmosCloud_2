@@ -1,22 +1,73 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, getTestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { Http, HttpModule, Headers, Response, ResponseOptions, BaseRequestOptions, XHRBackend } from '@angular/http';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { FormsModule } from '@angular/forms';
 
 import { RelayComponent } from './relay.component';
 import { RelayService } from '../relay.service';
 import { Relay } from '../relay';
+import { Channel } from '../channel';
+import { Node } from '../node';
+import { NodeService } from '../node.service';
 
 describe('RelayComponent', () => {
+  let mockBackend: MockBackend;
   let component: RelayComponent;
   let fixture: ComponentFixture<RelayComponent>;
+
+  const mockNode = { 
+    data: [
+      {
+        _id: '1',
+        name: 'Test1',
+        ip: '10.0.0.12',
+        modules: [
+          {
+            type: 'indicator',
+            style: 'off',
+            color: [ 0, 0, 255 ]
+          },
+          {
+            type: 'relay',
+            style: 'off',
+            channels: [
+              {
+                name: 'Lamp',
+                isOn: false
+              },
+              {
+                name: 'TV',
+                isOn: false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ RelayComponent ],
-      providers: [ RelayService ]
-    })
-    .compileComponents();
+      providers: [ 
+        RelayService, 
+        NodeService, 
+        BaseRequestOptions, 
+        MockBackend, 
+        {
+          provide: Http,
+          deps: [ MockBackend, BaseRequestOptions ],
+          useFactory: (defaultOptions: BaseRequestOptions, backend: XHRBackend) => {
+              return new Http(backend, defaultOptions);
+          } 
+        }
+      ],
+      imports: [ FormsModule, HttpModule ]
+    });
+    TestBed.compileComponents();
   }));
 
   beforeEach(() => {
@@ -25,8 +76,36 @@ describe('RelayComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('Check onInit()', () => {
+    let fixture: ComponentFixture<RelayComponent> = getTestBed().createComponent(RelayComponent);
+    fixture.componentInstance.ngOnInit();
+    fixture.detectChanges();
 
+
+    expect(this.edits).toEqual([false]);
+
+  });
+/*
+  it('Should create one relay componenet', () => {
+    getTestBed().compileComponents().then(() => {
+      let mockBackend = getTestBed().get(MockBackend);
+      mockBackend.connections.subscribe(
+        (connection: MockConnection) => {
+          connection.mockRespond(new Response(
+            new ResponseOptions({
+              body: JSON.stringify(mockNode)
+            })
+          ));
+        }
+      );
+      let fixture: ComponentFixture<RelayComponent> = getTestBed().createComponent(RelayComponent);
+      fixture.componentInstance.ngOnInit();
+      fixture.detectChanges();
+
+      let nodes = fixture.nativeElement.querySelectorAll('tr.rows');
+      expect(nodes.length).toBe(1);
+
+    });
+  });
+*/
 });

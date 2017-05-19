@@ -10,7 +10,4 @@ describe('RelayService', () => {
     });
   });
 
-  it('should ...', inject([RelayService], (service: RelayService) => {
-    expect(service).toBeTruthy();
-  }));
 });

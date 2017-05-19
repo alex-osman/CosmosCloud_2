@@ -9,8 +9,4 @@ describe('RssiService', () => {
       providers: [RssiService]
     });
   });
-
-  it('should ...', inject([RssiService], (service: RssiService) => {
-    expect(service).toBeTruthy();
-  }));
 });

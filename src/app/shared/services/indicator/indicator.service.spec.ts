@@ -10,7 +10,4 @@ describe('IndicatorService', () => {
     });
   });
 
-  it('should ...', inject([IndicatorService], (service: IndicatorService) => {
-    expect(service).toBeTruthy();
-  }));
 });

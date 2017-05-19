@@ -2,15 +2,18 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { NodeService } from './node.service';
+import { Node } from '../node';
+import { Http, HttpModule, Headers, Response, ResponseOptions, XHRBackend } from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 
-describe('NodeService', () => {
+describe('Service: NodeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [NodeService]
+      imports: [HttpModule],
+      providers: [ 
+        NodeService, 
+        { provide: XHRBackend, useClass: MockBackend }
+      ]
     });
   });
-
-  it('should ...', inject([NodeService], (service: NodeService) => {
-    expect(service).toBeTruthy();
-  }));
 });

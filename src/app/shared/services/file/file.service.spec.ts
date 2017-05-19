@@ -9,8 +9,4 @@ describe('FileService', () => {
       providers: [FileService]
     });
   });
-
-  it('should ...', inject([FileService], (service: FileService) => {
-    expect(service).toBeTruthy();
-  }));
 });
