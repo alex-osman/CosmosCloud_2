@@ -2,7 +2,7 @@
 import { async, ComponentFixture, TestBed, getTestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { Http, HttpModule, Headers, Response, ResponseOptions, BaseRequestOptions, XHRBackend } from '@angular/http';
+import { Http, HttpModule, Headers, Response, RequestMethod, ResponseOptions, BaseRequestOptions, XHRBackend } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { FormsModule } from '@angular/forms';
 
@@ -76,36 +76,6 @@ describe('RelayComponent', () => {
     fixture.detectChanges();
   });
 
-  it('Check onInit()', () => {
-    let fixture: ComponentFixture<RelayComponent> = getTestBed().createComponent(RelayComponent);
-    fixture.componentInstance.ngOnInit();
-    fixture.detectChanges();
 
-
-    expect(this.edits).toEqual([false]);
-
-  });
-/*
-  it('Should create one relay componenet', () => {
-    getTestBed().compileComponents().then(() => {
-      let mockBackend = getTestBed().get(MockBackend);
-      mockBackend.connections.subscribe(
-        (connection: MockConnection) => {
-          connection.mockRespond(new Response(
-            new ResponseOptions({
-              body: JSON.stringify(mockNode)
-            })
-          ));
-        }
-      );
-      let fixture: ComponentFixture<RelayComponent> = getTestBed().createComponent(RelayComponent);
-      fixture.componentInstance.ngOnInit();
-      fixture.detectChanges();
-
-      let nodes = fixture.nativeElement.querySelectorAll('tr.rows');
-      expect(nodes.length).toBe(1);
-
-    });
-  });
-*/
+  
 });

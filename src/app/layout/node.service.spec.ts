@@ -1,10 +1,38 @@
 /* tslint:disable:no-unused-variable */
 
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, async, inject, fakeAsync } from '@angular/core/testing';
+import { RequestMethod, HttpModule, Response, ResponseOptions, XHRBackend } from '@angular/http';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+
 import { NodeService } from './node.service';
 import { Node } from './node';
-import { Http, HttpModule, Headers, Response, ResponseOptions, XHRBackend } from '@angular/http';
-import { MockBackend } from '@angular/http/testing';
+
+const mockNode = { 
+  "_id": '1',
+  "name": 'Test1',
+  "ip": '10.0.0.12',
+  "modules": [
+    {
+      "type": 'indicator',
+      "style": 'off',
+      "color": [ 0, 0, 255 ]
+    },
+    {
+      "type": 'relay',
+      "style": 'off',
+      "channels": [
+        {
+          "name": 'Lamp',
+          "isOn": false
+        },
+        {
+          "name": 'TV',
+          "isOn": false
+        }
+      ]
+    }
+  ]
+};
 
 describe('Service: NodeService', () => {
   beforeEach(() => {
@@ -12,51 +40,26 @@ describe('Service: NodeService', () => {
       imports: [HttpModule],
       providers: [ 
         NodeService, 
-        { provide: XHRBackend, useClass: MockBackend }
+        { provide: XHRBackend, useClass: MockBackend },
       ]
     });
   });
 
-  describe('getNode()', () => {
-    const mockNode = { 
-      data: [
-        {
-          _id: '1',
-          name: 'Test1',
-          ip: '10.0.0.12',
-          modules: [
-            {
-              type: 'indicator',
-              style: 'off',
-              color: [ 0, 0, 255 ]
-            },
-            {
-              type: 'relay',
-              style: 'off',
-              channels: [
-                {
-                  name: 'Lamp',
-                  isOn: false
-                },
-                {
-                  name: 'TV',
-                  isOn: false
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    };
+  it('should get Node back', fakeAsync(
+    inject([ XHRBackend, NodeService ], (mockBackend, nodeService) => {
+      mockBackend.connections.subscribe((connection: MockConnection) => {
+        expect(connection.request.method).toBe(RequestMethod.Get);
 
-    it('should return a Node', 
-      inject([ NodeService, XHRBackend ], (nodeService, mockBackend) => {
-        mockBackend.connections.subscribe((connection) => {
-          connection.mockRespond(new Response(new ResponseOptions({
-            body: JSON.stringify(mockNode)
-          })));
-        });
+        connection.mockRespond(new Response(
+          new ResponseOptions({ body: mockNode })
+        ));
+      });
 
-    }));
-  });
+      nodeService.getNodes().then((res) =>{
+        expect(res).toEqual(mockNode);
+      });
+
+
+    })
+  ));
 });
