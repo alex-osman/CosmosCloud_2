@@ -23,13 +23,19 @@
       </div>
 
       <div class="card-block">
-        <div *ngIf="!room.edit">
-          <label>Enter: </label> {{room.enterString | json}}<br>
-          <label>Leave: </label> {{room.leaveString | json}}
-        </div>
         <div *ngIf="room.edit">
           <label>Enter: </label> <app-trigger (onGetTrigger)="onGetTrigger($event, room, 'enter')"></app-trigger>
           <label>Leave: </label> <app-trigger (onGetTrigger)="onGetTrigger($event, room, 'leave')"></app-trigger>
+        </div>
+        <div>
+          <label>Enter: </label>
+          <ul>
+            <li *ngFor="let s of room.enterString">{{s}}</li>
+          </ul>
+          <label>Leave: </label>
+          <ul>
+            <li *ngFor="let s of room.leaveString">{{s}}</li>
+          </ul>
         </div>
       </div>
     </div>

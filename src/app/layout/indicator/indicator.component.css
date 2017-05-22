@@ -1,14 +1,12 @@
 .card-block .bulb {
     float: right;
+    overflow: auto;
+    min-height: 100px;
 }
-
-.card-block {
-    margin: 20px;
-}
-
-.card {
-    height: auto;
-    margin-bottom: 100px;
+div .card {
+    min-height: 100px;
+    height: auto!important;
+    overflow: auto;
 }
 
 p {
