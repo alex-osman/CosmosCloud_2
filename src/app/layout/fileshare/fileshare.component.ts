@@ -1,3 +1,4 @@
+import { FileSizePipe } from './../../shared/pipes/file-size.pipe';
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { File } from '../file';
@@ -23,6 +24,7 @@ export class FileshareComponent {
 
   ngOnInit() {
     this.getFiles();
+    console.log(this.uploader);
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       if (item.isSuccess) {
         this.getFiles();
@@ -39,7 +41,7 @@ export class FileshareComponent {
   getFiles(): void {
     this.fileService.getFiles().then((files) => this.files = files);
   }
-  
+
   remove(file): void {
     this.fileService.deleteFile(file._id).then((res) => this.getFiles());
   }
