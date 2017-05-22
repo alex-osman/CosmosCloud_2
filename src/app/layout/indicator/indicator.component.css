@@ -2,6 +2,15 @@
     float: right;
 }
 
+.card-block {
+    margin: 20px;
+}
+
+.card {
+    height: auto;
+    margin-bottom: 100px;
+}
+
 p {
     float:left;
 }

@@ -17,8 +17,8 @@
             </p>
             <span class="bulb"
               [(colorPicker)]="colors[nodeIndex]" 
-              [cpPosition]="'bottom'"
-              [cpOutputFormat]="'rgba'"
+              cpPosition="right"
+              cpOutputFormat="rgba"
               [style.color]="colors[nodeIndex]"
               (colorPickerChange)="updateColors(nodeIndex)"
               [cpPositionRelativeToArrow]="true">
