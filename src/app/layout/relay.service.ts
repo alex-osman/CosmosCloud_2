@@ -11,7 +11,7 @@ import 'rxjs/add/operator/toPromise';
 export class RelayService {
 
   private headers = new Headers({'Content-Type': 'application/json'})
-  private relayUrl = "/relay";
+  private relayUrl = '/relay';
 
   constructor(private http: Http) { }
 
@@ -44,7 +44,7 @@ export class RelayService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.log("We have an error", error);
+    console.log('We have an error', error);
     return Promise.reject(error.message || error);
   }
 
