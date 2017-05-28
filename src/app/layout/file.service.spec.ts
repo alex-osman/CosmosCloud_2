@@ -1,5 +1,4 @@
 /* tslint:disable:no-unused-variable */
-//TODO: delete function()
 
 import { TestBed, async, inject, fakeAsync } from '@angular/core/testing';
 import { RequestMethod, HttpModule, Response, ResponseOptions, XHRBackend } from '@angular/http';
@@ -43,6 +42,22 @@ describe('FileService', () => {
 
       fileService.getFiles().then((res) => {
         expect(res).toEqual(mockFile);
+      });
+    })
+  ));
+
+  it('should Delete File', fakeAsync(
+    inject([ XHRBackend, FileService ], (mockBackend, fileService) => {
+      mockBackend.connections.subscribe((connection: MockConnection) => {
+        expect(connection.request.method).toBe(RequestMethod.Delete);
+
+        connection.mockRespond(new Response(
+          new ResponseOptions({ body: mockFile })
+        ));
+      });
+
+      fileService.deleteFile(1).then((res) => {
+        expect(res).toBeDefined();
       });
     })
   ));

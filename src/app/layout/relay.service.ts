@@ -36,10 +36,10 @@ export class RelayService {
       .catch(this.handleError);
   }
 
-  toggle(node: Node, channelI: number): Promise<boolean> {
+  toggle(node: Node, channelI: number): Promise<void> {
     return this.http.get(`${this.relayUrl}/${node.ip}/toggle/${channelI}`)
       .toPromise()
-      .then(response => JSON.parse(response.json())[channelI] as boolean)
+      .then(response => console.log(JSON.parse(response.json())[channelI] as boolean))
       .catch(this.handleError);
   }
 

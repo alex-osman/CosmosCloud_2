@@ -45,27 +45,20 @@ describe('Service: IndicatorService', () => {
     })
   ));
 
-// TODO: need to figure out how exactly to test this, at least get the proper output
-  it('should set Color and return proper Indicator object', fakeAsync(
+  it('should set Color', fakeAsync(
     inject([ XHRBackend, IndicatorService ], (mockBackend, indicatorService) => {
       mockBackend.connections.subscribe((connection: MockConnection) => {
         expect(connection.request.method).toBe(RequestMethod.Get);
 
         connection.mockRespond(new Response(
-          new ResponseOptions({ body: {
-              'id': '3',
-              'style': 'on',
-              'type': 'indicator',
-              'color': [ 1, 2, 3 ]
-            }
-          })
+          new ResponseOptions({ status: 200 })
         ));
       });
 
-      indicatorService.setColor([0, 0, 255], '3').then((res) => {
-        expect(res.url).toBe(null);
-      });
+      indicatorService.setColor([0, 0, 255], 3).then((res) => {
+        expect(res.status).toEqual(200);
+      })
     })
-  ));
+  ))
 
 });

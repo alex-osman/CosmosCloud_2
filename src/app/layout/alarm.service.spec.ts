@@ -1,5 +1,4 @@
 /* tslint:disable:no-unused-variable */
-//TODO: look at the other functions, however they seem to return null so does it matter.s
 
 import { TestBed, async, inject, fakeAsync } from '@angular/core/testing';
 import { RequestMethod, HttpModule, Response, ResponseOptions, XHRBackend } from '@angular/http';

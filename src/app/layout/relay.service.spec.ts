@@ -115,7 +115,7 @@ describe('RelayService', () => {
         expect(connection.request.method).toBe(RequestMethod.Get);
 
         connection.mockRespond(new Response(
-          new ResponseOptions({ body: true })
+          new ResponseOptions({ body: true})
         ));
       });
 
@@ -131,7 +131,7 @@ describe('RelayService', () => {
         expect(connection.request.method).toBe(RequestMethod.Get);
 
         connection.mockRespond(new Response(
-          new ResponseOptions({ body: true })
+          new ResponseOptions({})
         ));
       });
 
@@ -140,6 +140,6 @@ describe('RelayService', () => {
       });
     })
   ));
-*/ 
+*/
 
 });

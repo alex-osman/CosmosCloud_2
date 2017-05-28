@@ -23,7 +23,7 @@ export class RssiService {
     return this.http.get(`${this.rssiUrl}/setup`)
       .toPromise()
       .then(response => console.log(response))
-      .catch(this.handleError)
+      .catch(this.handleError);
   }
 
   submitRoom(roomName: String): Promise<void> {
@@ -47,16 +47,16 @@ export class RssiService {
       .catch(this.handleError);
   }
 
-  delete(room): Promise<void> {
+  delete(room): Promise<any> {
     return this.http.delete(`${this.rssiUrl}/${room._id}`)
       .toPromise()
-      .then(response => console.log(response))
+      .then(response => response)
       .catch(this.handleError);
   }
 
 
   private handleError(error: any): Promise<any> {
-    console.log("We have an error", error);
+    console.log('We have an error', error);
     return Promise.reject(error.message || error);
   }
 
