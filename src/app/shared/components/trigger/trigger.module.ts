@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { NodeService } from '../../services/node/node.service';
+import { NodeService } from './../../../layout/node.service';
 import { ColorPickerModule, ColorPickerService } from 'angular2-color-picker';
 
 import { TriggerComponent } from './trigger.component';

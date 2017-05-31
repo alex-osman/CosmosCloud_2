@@ -1,9 +1,9 @@
 import { Component, OnInit, EventEmitter, Input, Output} from '@angular/core';
 import { ColorPickerService } from 'angular2-color-picker';
-import { Relay } from './../../services/relay';
-import { Channel } from './../../services/channel';
-import { Node } from './../../services/node';
-import { NodeService } from '../../services/node/node.service';
+import { Relay } from './../../../layout/relay';
+import { Channel } from './../../../layout/channel';
+import { Node } from './../../../layout/node';
+import { NodeService } from './../../../layout/node.service';
 
 
 @Component({

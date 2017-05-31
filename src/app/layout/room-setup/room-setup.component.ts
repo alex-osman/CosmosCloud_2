@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RssiService } from './../../shared/services/rssi/rssi.service';
+import { RssiService } from './../rssi.service';
 import { Room } from '../room';
 
 

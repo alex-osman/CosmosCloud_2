@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { RoomSetupRoutingModule } from './room-setup-routing.module';
 import { RoomSetupComponent } from './room-setup.component';
-import { RssiService } from './../../shared/services/rssi/rssi.service';
+import { RssiService } from './../rssi.service';
 import { Room } from './../room';
 import { ColorPickerModule } from 'angular2-color-picker';
 import { TriggerModule } from './../../shared';
