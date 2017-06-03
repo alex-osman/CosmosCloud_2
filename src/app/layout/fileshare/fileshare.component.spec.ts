@@ -21,4 +21,11 @@ describe('FileshareComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
+/*
+  it('should create a fileshare component', () => {
+    let app = new FileshareComponent();
+    expect(app).toBeTruthy();
+  });
+*/
 });

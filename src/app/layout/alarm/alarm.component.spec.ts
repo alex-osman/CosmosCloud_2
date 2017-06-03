@@ -22,4 +22,15 @@ describe('AlarmComponent', () => {
     fixture.detectChanges();
   });
 
+/*
+  it('should create an alarm component', () => {
+    let app = new AlarmComponent();
+    expect(app).toBeTruthy();
+  });
+*/
+
+  it('should have defined component', () => {
+    expect(component).toBeDefined();
+  });
+
 });
