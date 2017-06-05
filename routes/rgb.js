@@ -51,7 +51,7 @@ module.exports = function(app, request, n, p) {
     getPort(function(ports) {
       getRgbIP(function(rgbIP) {
         rgbIP.forEach(function(ip, index) {
-          if (ip._id == req.params.id && typeof rgb !== 'undefined' && rgb) {
+          if (ip._id == req.params.id && typeof ports !== 'undefined' && ports.rgb) {
             console.log('http://' + ip.ip + ':' + ports.rgb + '/' + style + '/' + r + '/' + g + '/' + b);
             request('http://' + ip.ip + ':' + ports.rgb + '/' + style + '/' + r + '/' + g + '/' + b, function(err, response, body) {
               if (!err && response.statusCode === 200) {
