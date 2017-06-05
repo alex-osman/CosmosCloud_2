@@ -2,7 +2,7 @@
   <div class="indicators col-md-12">
     <br>
     <!-- INDICATOR CARD -->
-    <div *ngFor="let node of nodes; let nodeIndex = index " class="card" style="width: 20rem;">
+    <div *ngFor="let node of nodes; let nodeIndex = index " class="card" style="width: 30rem;">
 
       <div class="card-header">
         <h4 class="card-title">{{node.name}}</h4>
@@ -17,8 +17,8 @@
             </p>
             <span class="bulb"
               [(colorPicker)]="colors[nodeIndex]" 
-              [cpPosition]="'bottom'"
-              [cpOutputFormat]="'rgba'"
+              cpPosition="left"
+              cpOutputFormat="rgba"
               [style.color]="colors[nodeIndex]"
               (colorPickerChange)="updateColors(nodeIndex)"
               [cpPositionRelativeToArrow]="true">

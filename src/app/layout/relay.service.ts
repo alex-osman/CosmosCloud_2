@@ -11,7 +11,7 @@ import 'rxjs/add/operator/toPromise';
 export class RelayService {
 
   private headers = new Headers({'Content-Type': 'application/json'})
-  private relayUrl = "/relay";
+  private relayUrl = '/relay';
 
   constructor(private http: Http) { }
 
@@ -36,15 +36,15 @@ export class RelayService {
       .catch(this.handleError);
   }
 
-  toggle(node: Node, channelI: number): Promise<boolean> {
+  toggle(node: Node, channelI: number): Promise<void> {
     return this.http.get(`${this.relayUrl}/${node.ip}/toggle/${channelI}`)
       .toPromise()
-      .then(response => JSON.parse(response.json())[channelI] as boolean)
+      .then(response => console.log(JSON.parse(response.json())[channelI] as boolean))
       .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {
-    console.log("We have an error", error);
+    console.log('We have an error', error);
     return Promise.reject(error.message || error);
   }
 

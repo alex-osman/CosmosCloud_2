@@ -49,8 +49,11 @@ module.exports = (app, request, r) => {
       //We are in a single room
       if (currentRoom == null) {
         enter(inRooms[0]);
-      } else if (currentRoom._id != inRooms[0]._id) {
+      } else if (!currentRoom._id.equals(inRooms[0]._id)) {
         //We are leaving `currentRoom` and entering inRooms[0]
+        let cid = currentRoom._id;
+        let rid = inRooms[0]._id;
+        
         leave(currentRoom)
         enter(inRooms[0])
       }
@@ -124,24 +127,24 @@ module.exports = (app, request, r) => {
     if (!room)
       return;
     currentRoom = room;
-    /*room.enter.forEach((url) => {
+    room.enter.forEach((url) => {
       request(url, (err, res) => {
         if (err)
           throw err;
       })
-    })*/
+    })
     console.log('Entered ' + room.name);
   }
 
   let leave = (room) => {
     if (!room)
       return;
-    /*room.leave.forEach((url) => {
+    room.leave.forEach((url) => {
       request(url, (err, res) => {
         if (err)
           throw err;
       })
-    })*/
+    })
     console.log('Left ' + room.name);
   }
 }

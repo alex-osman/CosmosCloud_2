@@ -1,3 +1,4 @@
+import { FileSizePipe } from './../../shared/pipes/file-size.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -12,6 +13,6 @@ import { FileService } from './../file.service';
     FileshareRoutingModule
   ],
   providers: [FileService],
-  declarations: [FileshareComponent, FileSelectDirective, FileDropDirective,]
+  declarations: [FileshareComponent, FileSelectDirective, FileDropDirective, FileSizePipe]
 })
 export class FileshareModule { }

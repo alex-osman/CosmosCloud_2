@@ -33,6 +33,12 @@ module.exports = (app, request, a) => {
     res.send('Stopped');
   })
 
+  app.delete(baseUrl + '/:alarmId', (req, res) => {
+    const alarmId = req.params.alarmId;
+    deleteAlarm(alarmId)
+    .then(x => res.send(x))
+  })
+
   app.post(baseUrl + '/updateAlarm', (req, res) => {
     let alarm = req.body.alarm;
     updateAlarm(alarm)
@@ -65,6 +71,16 @@ module.exports = (app, request, a) => {
   let updateAlarm = (alarm) => {
     return new Promise((resolve, reject) => {
       Alarms.update({_id: alarm._id}, alarm, (err, result) => {
+        if (err)
+          reject(err);
+        resolve(result);
+      })
+    })
+  }
+
+  let deleteAlarm = (alarmId) => {
+    return new Promise((resolve, reject) => {
+      Alarms.remove({_id: alarmId}, (err, result) => {
         if (err)
           reject(err);
         resolve(result);

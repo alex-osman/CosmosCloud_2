@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <button class="btn btn-default" (click)="addAlarm()">Add Alarm</button>
+    <button class="btn btn-secondary" (click)="addAlarm()">Add Alarm</button>
     <br>
     <div *ngFor="let alarm of alarms" class="card" style="width: 40rem;">
       <div class="card-header">
@@ -21,7 +21,7 @@
         <label>Triggers: </label> 
         <br>
         <app-trigger *ngIf="alarm.edit" (onGetTrigger)="onGetTrigger($event, alarm)" ></app-trigger>
-        <div *ngFor="let t of alarm.trigger">
+        <div *ngFor="let t of alarm.triggerString">
           {{t}}<button *ngIf="alarm.edit" class="btn btn-sm btn-danger" (click)="deleteTrigger(t, alarm)">x</button>
         </div> 
       </div>
