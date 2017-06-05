@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+import { NodeService } from '../node.service';
 import { AlarmService } from '../alarm.service';
 import { Alarm } from '../alarm';
 
@@ -18,11 +20,16 @@ export class AlarmComponent implements OnInit {
 
   getAlarms(): void {
     this.alarmService.getAlarms()
-    .then(alarms => this.alarms = alarms)
+    .then(alarms => this.alarms = alarms);
   }
 
   cancel(alarm): void {
     this.getAlarms();
+  }
+
+  delete(alarm: Alarm): void {
+    this.alarmService.delete(alarm._id)
+    .then(() => this.getAlarms());
   }
 
   save(alarm): void {
@@ -43,24 +50,25 @@ export class AlarmComponent implements OnInit {
   }
 
   getTime(cronDate): Date {
-    let times = cronDate.split(' ').map(x => x == '*' ? 0 : x);
+    const times = cronDate.split(' ').map(x => x == '*' ? 0 : x);
     return new Date(2017, 1, 1, times[2], times[1], 0, 0);
   }
 
   deleteTrigger(trigger, alarm): void {
     console.log(trigger);
-    alarm.trigger = alarm.trigger.filter(t => t != trigger)
+    alarm.trigger = alarm.trigger.filter(t => t !== trigger);
     console.log(alarm.trigger);
     this.save(alarm);
   }
 
   addAlarm(): void {
     this.alarmService.addAlarm()
-    .then(() => this.getAlarms())
+    .then(() => this.getAlarms());
   }
 
   onGetTrigger(trigger, alarm): void {
-    alarm.trigger.push(trigger);
+    alarm.trigger.push(trigger.url);
+    alarm.triggerString.push(trigger.triggerString)
     console.log(alarm);
     this.save(alarm);
   }

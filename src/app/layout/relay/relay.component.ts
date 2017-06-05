@@ -6,7 +6,7 @@ import { NodeService } from '../node.service';
 import { RelayService } from '../relay.service';
 
 @Component({
-  selector: 'my-relay',
+  selector: 'app-relay',
   templateUrl: './relay.component.html',
   styleUrls: ['./relay.component.css']
 })
@@ -18,7 +18,7 @@ export class RelayComponent implements OnInit {
     private relayService: RelayService) { }
 
   ngOnInit() {
-    this.edits = [false]
+    this.edits = [false];
     this.refreshCycle();
   }
 
@@ -27,15 +27,16 @@ export class RelayComponent implements OnInit {
     .then((nodes) => {
       this.nodes = nodes;
       this.edits = nodes.map(n => false);
-    })
+    });
   }
 
   toggle(node: Node, channelI: number): void {
     this.relayService.toggle(node, channelI)
       .then((status) => {
-        for (var i = 0; i < node.modules.length; i++) {
-          if (node.modules[i].type == "relay")
+        for (let i = 0; i < node.modules.length; i++) {
+          if (node.modules[i].type === 'relay') {
             node.modules[i].channels[channelI].isOn = status;
+          }
         }
         console.log(status);
         this.getNodes();
@@ -46,8 +47,8 @@ export class RelayComponent implements OnInit {
   on(node: Node): void {
     this.relayService.on(node)
     .then((status) => {
-      for (var i = 0; i < node.modules.length; i++) {
-        if (node.modules[i].type == "relay") {
+      for (let i = 0; i < node.modules.length; i++) {
+        if (node.modules[i].type == 'relay') {
           node.modules[i].channels[0].isOn = true;
           node.modules[i].channels[1].isOn = true;
         }
@@ -61,8 +62,8 @@ export class RelayComponent implements OnInit {
   off(node: Node): void {
   this.relayService.off(node)
     .then((status) => {
-      for (var i = 0; i < node.modules.length; i++) {
-        if (node.modules[i].type == "relay") {
+      for (let i = 0; i < node.modules.length; i++) {
+        if (node.modules[i].type == 'relay') {
           node.modules[i].channels[0].isOn = false;
           node.modules[i].channels[1].isOn = false;
         }
@@ -78,12 +79,14 @@ export class RelayComponent implements OnInit {
 
   all(node: Node, allOn: boolean): void {
     node.modules
-      .find(module => module.type == 'relay')
+      .find(module => module.type === 'relay')
       .channels.forEach(channel => {
-        if (channel.isOn != allOn)
+        if (channel.isOn !== allOn) {
           this.on(node);
-        else this.off(node);
-      })
+        } else {
+          this.off(node);
+        }
+      });
   }
 
   cancel(node): void {
@@ -94,10 +97,10 @@ export class RelayComponent implements OnInit {
     this.update(node);
   }
 
-  //This will refresh the status of the nodes every second
+  // This will refresh the status of the nodes every second
   refreshCycle(): void {
     if (this.edits.filter(x => x).length < 1) {
-      this.getNodes()
+      this.getNodes();
     }
     setTimeout(() => this.refreshCycle(), 5000);
   }

@@ -17,9 +17,17 @@ const roomSchema = new mongoose.Schema({
         type: [String],
         required: [false]
     },
+    enterString: {
+        type: [String],
+        default: []
+    },
     leave: {
         type: [String],
         required: [false]
+    },
+    leaveString: {
+        type: [String],
+        default: []
     }
 });
 

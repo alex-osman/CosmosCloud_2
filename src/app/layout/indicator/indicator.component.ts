@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ColorPickerService } from 'ngx-color-picker';
+import { ColorPickerService } from 'angular2-color-picker';
 import { Node } from '../node';
 import { Indicator } from '../indicator';
 import { IndicatorService } from '../indicator.service';

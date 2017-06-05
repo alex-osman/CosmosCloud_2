@@ -22,7 +22,10 @@ describe('FileshareComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+/*
+  it('should create a fileshare component', () => {
+    let app = new FileshareComponent();
+    expect(app).toBeTruthy();
   });
+*/
 });

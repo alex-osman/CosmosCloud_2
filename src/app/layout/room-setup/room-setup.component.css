@@ -1,5 +1,12 @@
 .card-block .bulb {
     float: right;
+    overflow: auto;
+}
+div {
+    min-height: 100px;
+    height: auto!important;
+    height: 100px;
+    overflow: auto;
 }
 
 p {

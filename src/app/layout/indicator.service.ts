@@ -8,8 +8,8 @@ import { Node } from './node';
 @Injectable()
 export class IndicatorService {
 
-  private headers = new Headers({'Content-Type': 'application/json'})
-  private indicatorUrl = "/rgb";
+  private headers = new Headers({'Content-Type': 'application/json'});
+  private indicatorUrl = '/rgb';
 
   constructor(private http: Http) { }
 
@@ -21,7 +21,7 @@ export class IndicatorService {
   }
 
   setColor(color: number[], id: string): Promise<any> {
-    const url = `${this.indicatorUrl}/${id}/on/${color[0]}/${color[1]}/${color[2]}`
+    const url = `${this.indicatorUrl}/${id}/on/${color[0]}/${color[1]}/${color[2]}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response)
@@ -29,7 +29,7 @@ export class IndicatorService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.log("We have an error", error);
+    console.log('We have an error', error);
     return Promise.reject(error.message || error);
   }
 

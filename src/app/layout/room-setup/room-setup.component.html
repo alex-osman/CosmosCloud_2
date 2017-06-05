@@ -6,7 +6,8 @@
     <button *ngIf="settingUp" class="btn btn-secondary" (click)="submitRoom()">Finish!</button>
     <br>
     <p>{{message}}</p>
-    <p>{{currentRoom}}</p>
+    <br>
+    <label>Current room: </label>&nbsp; {{currentRoom}}
     <br><br>
 
     <div *ngFor="let room of rooms" class="card" style="width: 40rem;">
@@ -22,50 +23,20 @@
       </div>
 
       <div class="card-block">
-        <div *ngIf="!room.edit">
-          <label>Enter: </label> {{room.enter | json}}<br>
-          <label>Leave: </label> {{room.leave | json}}
-        </div>
         <div *ngIf="room.edit">
-          <label>Enter: </label> <app-trigger></app-trigger>
-          <label>Leave: </label> <app-trigger></app-trigger>
+          <label>Enter: </label> <app-trigger (onGetTrigger)="onGetTrigger($event, room, 'enter')"></app-trigger>
+          <label>Leave: </label> <app-trigger (onGetTrigger)="onGetTrigger($event, room, 'leave')"></app-trigger>
         </div>
-
-
-
-
-        <div *ngIf="room.edit">
-          <!--SELECT NODE-->
-          <select [(ngModel)]="node">
-            <option *ngFor="let n of nodes" [ngValue]="n">{{n.name}}</option>
-          </select>
-
-          <!--SELECT MODULE-->
-          <select *ngIf="node != null" [(ngModel)]="module">
-            <option *ngFor="let m of node.modules" [ngValue]="m">{{m.type}}</option>
-          </select>
-
-          <!--SELECT ACTION-->
-          <select *ngIf="module != null" [(ngModel)]="action">
-            <option *ngFor="let a of actions[module.type]" [ngValue]="a">{{a}}</option>
-          </select>
-
-          <!--SELECT VALUE-->        
-          <select *ngIf="module != null && module.type == 'relay' && action != null" [(ngModel)]="value">
-            <option *ngFor="let c of module.channels; let cI = index" [ngValue]="cI">{{c.name}}</option>
-          </select>
-          <span class="bulb"
-            *ngIf="module != null && module.type == 'indicator' && action != null"
-            [(colorPicker)]="value"
-            [cpPosition]="'bottom'"
-            [cpOutputFormat]="'rgba'"
-            [style.color]="value"
-            [cpFallbackColor]="'#000'"
-            [cpPositionRelativeToArrow]="true">
-            <i class="fa fa-lightbulb-o fa-4x" aria-hidden="true"></i>
-          </span>
+        <div>
+          <label>Enter: </label>
+          <ul>
+            <li *ngFor="let s of room.enterString">{{s}}</li>
+          </ul>
+          <label>Leave: </label>
+          <ul>
+            <li *ngFor="let s of room.leaveString">{{s}}</li>
+          </ul>
         </div>
-
       </div>
     </div>
     <!--<p>{{nodes | json}}</p>-->
