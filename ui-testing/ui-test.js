@@ -61,6 +61,11 @@ describe('Relay', function() {
     });
   });
 
+  it('toggles lights', function() {
+    browser.ignoreSynchronization = true;
+    browser.get('http://www.localhost:4200/relay/10.0.0.98/toggle/');
+  });
+
   // TODO: Test "Edit" and change text, then "Save" and make sure the text updates
   // TODO: Test "All On" (Will only work if connected to pi)
   // TODO: Test "All Off" (Will only work if connected to pi)
