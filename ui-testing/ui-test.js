@@ -60,6 +60,11 @@ describe('Relay', function() {
       });
     });
   });
+
+  it('toggles lights', function() {
+    browser.ignoreSynchronization = true;
+    browser.get('http://www.localhost:4200/relay/10.0.0.98/toggle/');
+  });
 });
 
 /*
