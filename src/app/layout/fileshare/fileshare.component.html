@@ -55,7 +55,7 @@
                 <td>{{file.name}}</td>
                 <td>{{file.path.substring(file.path.indexOf('/14')+1) | date}}</td>
                 <td>{{file.size | fileSize}}</td>
-                <td><a target="_self" href="{{file.path.substring(3)}}" download="{{file.name + file.extension}}">Download</a></td>
+                <td><a target="_self" [href]="file.path.substring(3)" download="{{file.name + file.extension}}">Download</a></td>
                 <td (click)="remove(file)">x</td>
             </tr>
         </table>

@@ -1,6 +1,6 @@
 exports.config = {
   seleniumAddress: 'http://localhost:4444/wd/hub',
-  specs: ['ui-test.js'],
+  specs: ['room-test.js'],
   verbose: true,
 };
 

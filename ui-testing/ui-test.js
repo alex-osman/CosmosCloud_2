@@ -61,17 +61,10 @@ describe('Relay', function() {
     });
   });
 
-  // TODO: Test "Edit" and change text, then "Save" and make sure the text updates
-  // TODO: Test "All On" (Will only work if connected to pi)
-  // TODO: Test "All Off" (Will only work if connected to pi)
-  // TODO: Test "<PowerButton>" (Will only work if connected to pi)
-});
-
-/*
- * Indicator
- */
-describe('Indicator', function() {
-  // TODO: Test changing the color of an indicator light (Test the card numbers change)
+  it('toggles lights', function() {
+    browser.ignoreSynchronization = true;
+    browser.get('http://www.localhost:4200/relay/10.0.0.98/toggle/');
+  });
 });
 
 /*
@@ -120,10 +113,6 @@ describe('Alarm', function() {
       });
     });
   });
-
-  // TODO: Test editing the name of a alarm
-  // TODO: Test editing the time of a alarm
-  // TODO: Test deleting an alarm
 });
 
 /*
@@ -177,14 +166,5 @@ describe('Room Setup', function() {
       });
     });
   });
-});
-
-/*
- * Fileshare
- */
-describe('Fileshare', function() {
-  // TODO: Test upload of a ducument (Might not be possible)
-  // TODO: Test delete of a ducument (Might not be possible)
-  // TODO: Test cancel of an uploading document (Might not be possible)
 });
 
