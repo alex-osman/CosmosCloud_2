@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed, inject, fakeAsync } from '@angular/co
 import { By } from '@angular/platform-browser';
 import { DebugElement, destroyPlatform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ColorPickerModule } from 'angular2-color-picker';
+// import { ColorPickerModule } from 'angular2-color-picker';
 
 import { NodeService } from '../node.service';
 import { RelayService } from '../relay.service';

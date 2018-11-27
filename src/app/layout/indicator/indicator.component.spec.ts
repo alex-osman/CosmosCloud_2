@@ -6,7 +6,7 @@ import { DebugElement } from '@angular/core';
 import { IndicatorComponent } from './indicator.component';
 import { Indicator } from '../indicator';
 import { IndicatorService } from '../indicator.service';
-import { ColorPickerService } from 'angular2-color-picker';
+// import { ColorPickerService } from 'angular2-color-picker';
 
 describe('IndicatorComponent', () => {
   let component: IndicatorComponent;

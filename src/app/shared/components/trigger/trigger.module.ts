@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { NodeService } from './../../../layout/node.service';
-import { ColorPickerModule, ColorPickerService } from 'angular2-color-picker';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 import { TriggerComponent } from './trigger.component';
 
@@ -15,7 +15,7 @@ import { TriggerComponent } from './trigger.component';
         ColorPickerModule,
         RouterModule
     ],
-    providers: [ NodeService, ColorPickerService ],
+    providers: [ NodeService ],
     declarations: [ TriggerComponent ],
     exports: [ TriggerComponent ]
 })

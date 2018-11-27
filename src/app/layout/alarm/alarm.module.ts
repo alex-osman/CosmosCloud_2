@@ -6,7 +6,7 @@ import { AlarmRoutingModule } from './alarm-routing.module';
 import { AlarmComponent } from './alarm.component';
 import { AlarmService } from './../alarm.service';
 import { NodeService } from './../node.service';
-import { ColorPickerModule } from 'angular2-color-picker';
+import { ColorPickerModule } from 'ngx-color-picker';
 import { TriggerModule } from './../../shared';
 
 
@@ -17,6 +17,7 @@ import { TriggerModule } from './../../shared';
     AlarmRoutingModule,
     TriggerModule,
     ColorPickerModule
+    
   ],
   providers: [AlarmService, NodeService],
   declarations: [AlarmComponent]

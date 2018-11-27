@@ -6,7 +6,7 @@ import { IndicatorComponent } from './indicator.component';
 import { NodeService } from './../node.service';
 import { RelayService } from './../relay.service';
 import { IndicatorService } from './../indicator.service';
-import { ColorPickerModule } from 'angular2-color-picker';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   imports: [

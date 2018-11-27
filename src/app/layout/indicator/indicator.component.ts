@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ColorPickerService } from 'angular2-color-picker';
+// import { ColorPickerService } from 'angular2-color-picker';
 import { Node } from '../node';
 import { Indicator } from '../indicator';
 import { IndicatorService } from '../indicator.service';
@@ -15,7 +15,8 @@ export class IndicatorComponent implements OnInit {
   title = "Configure Indicators";
   colors = {}
 
-  constructor(private cpService: ColorPickerService,
+  constructor(
+    // private cpService: ColorPickerService,
     private nodeService: NodeService,
     private indicatorService: IndicatorService) { }
 
@@ -45,7 +46,8 @@ export class IndicatorComponent implements OnInit {
         module.color[1] = c[1];
         module.color[2] = c[2];
         this.indicatorService.setColor(c, this.nodes[n]._id)
-          .then((p) => {
+        .subscribe((p) => {
+            console.log(p)
             this.nodeService.update(this.nodes[n])
               .then(n => n)
               .catch(e => console.log(e))

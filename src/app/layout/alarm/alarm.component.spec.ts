@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing'
 import { By } from '@angular/platform-browser';
 import { DebugElement, destroyPlatform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ColorPickerModule } from 'angular2-color-picker';
+// import { ColorPickerModule } from 'angular2-color-picker';
 
 import { AlarmComponent } from './alarm.component';
 import { AlarmService } from '../alarm.service';
@@ -38,7 +38,7 @@ describe('Component: AlarmComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ FormsModule, TriggerModule, ColorPickerModule ],
+      imports: [ FormsModule, TriggerModule ],
       declarations: [ AlarmComponent ],
       providers: [ {provide: AlarmService, useClass: MockAlarmService} ],
     });

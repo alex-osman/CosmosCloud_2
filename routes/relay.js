@@ -58,8 +58,10 @@ module.exports = function(app, request, n) {
         let node = nodes[0]
         request('http://' + ip + ':' + port + '/' + action + '/' + channel, function(err, res) {
           if (err) {
-            reject(err);
+            console.log(err)
+            return reject(err);
           }
+          console.log(res.body)
           //Update node
           node.modules
             .find(module => module.type == 'relay')

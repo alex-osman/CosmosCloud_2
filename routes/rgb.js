@@ -55,7 +55,7 @@ module.exports = function(app, request, n, p) {
             console.log('http://' + ip.ip + ':' + ports.rgb + '/' + style + '/' + r + '/' + g + '/' + b);
             request('http://' + ip.ip + ':' + ports.rgb + '/' + style + '/' + r + '/' + g + '/' + b, function(err, response, body) {
               if (!err && response.statusCode === 200) {
-                //  console.log(body);
+                console.log(body);
                 res.send(body);
               } else {
                 console.log(err);

@@ -43,7 +43,7 @@ module.exports = (app, request, a) => {
     let alarm = req.body.alarm;
     updateAlarm(alarm)
     .then(() => {
-      res.send('updated');
+      res.send({ status: 'updated' });
       runAllJobs()
       .then(x => console.log("Alarms updated"))
     });
@@ -108,7 +108,7 @@ module.exports = (app, request, a) => {
               request(url, (err, res) => {
                 if (err)
                   reject(err);
-                console.log("Success");
+                console.log("Success", res);
               })
             })
           }, () => {

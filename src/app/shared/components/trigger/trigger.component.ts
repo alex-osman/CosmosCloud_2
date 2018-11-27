@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output} from '@angular/core';
-import { ColorPickerService } from 'angular2-color-picker';
+// import { ColorPickerService } from 'angular2-color-picker';
 import { Relay } from './../../../layout/relay';
 import { Channel } from './../../../layout/channel';
 import { Node } from './../../../layout/node';
@@ -23,7 +23,7 @@ export class TriggerComponent implements OnInit {
   actions: Object;
   
 
-  constructor(private nodeService: NodeService, private cpService: ColorPickerService) { }
+  constructor(private nodeService: NodeService) { }
 
   ngOnInit() {
     this.getNodes();
